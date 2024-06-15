@@ -24,6 +24,7 @@ import white.ball.survival.domain.model.extension_model.Level
 import white.ball.survival.domain.repository.ItemUseRepository
 import white.ball.survival.present.dialog_screen.backpack.adapter.BackpackAdapter
 import white.ball.survival.present.dialog_screen.backpack.view_model.BackpackViewModel
+import white.ball.survival.present.dialog_screen.build.bonfire.BonfireDialogFragment
 import white.ball.survival.present.view_model_factory.viewModelCreator
 
 class BackpackDialogFragment : DialogFragment() {
@@ -128,7 +129,14 @@ class BackpackDialogFragment : DialogFragment() {
                 }
 
                 val putOnImage = viewModel.setPutOn(index, itemsForPutOn)
-                setImageIcon(index, putOnImage)
+                val correctedIndex = if (ItemUse.ARROW == itemsForPutOn.item.itemUse) {
+                    viewModel.player.value!!.placeForPutOn[1]!!.count
+                } else if (ItemUse.OPENED_SCROLL == itemsForPutOn.item.itemUse) {
+                    viewModel.player.value!!.placeForPutOn[3]!!.count
+                } else  {
+                    0
+                }
+                setImageIcon(index, putOnImage, correctedIndex)
 
                 isEmptyBackpack()
                 adapter.notifyDataSetChanged()
@@ -142,7 +150,7 @@ class BackpackDialogFragment : DialogFragment() {
                 }
 
                 val putIntoCook = viewModel.setForCook(index, itemsForCook, viewModel.player.value!!.backpack)
-                setImageIcon(index, putIntoCook)
+                setImageIcon(index, putIntoCook, 0)
 
                 isEmptyBackpack()
                 adapter.notifyDataSetChanged()
@@ -227,12 +235,19 @@ class BackpackDialogFragment : DialogFragment() {
 
         // load item in put on
         for (index in 0 until viewModel.player.value!!.placeForPutOn.size) {
+            val correctedIndex = if (viewModel.player.value!!.placeForPutOn[1] != null && index == 1) {
+                viewModel.player.value!!.placeForPutOn[1]!!.count
+            } else if (viewModel.player.value!!.placeForPutOn[3] != null && index == 3) {
+                viewModel.player.value!!.placeForPutOn[3]!!.count
+            } else  {
+                0
+            }
             val imageForPutOn = if (viewModel.player.value!!.placeForPutOn[index] != null) {
                 viewModel.player.value!!.placeForPutOn[index]!!.item.imageId
             } else {
                 viewModel.getIconForItemPutOnResImageMap(index)
             }
-            setImageIcon(index, imageForPutOn)
+            setImageIcon(index, imageForPutOn, correctedIndex)
         }
 
         eatingSound = MediaPlayer.create(requireContext(), R.raw.eating)
@@ -346,25 +361,25 @@ class BackpackDialogFragment : DialogFragment() {
         return when (index) {
             0 -> {
                 imageIconForBackpack = viewModel.setPutOn(0, null)
-                setImageIcon(0, imageIconForBackpack)
+                setImageIcon(0, imageIconForBackpack, 0)
                 true
             }
 
             1 -> {
                 imageIconForBackpack = viewModel.setPutOn(1, null)
-                setImageIcon(1, imageIconForBackpack)
+                setImageIcon(1, imageIconForBackpack, 0)
                 true
             }
 
             2 -> {
                 imageIconForBackpack = viewModel.setPutOn(2, null)
-                setImageIcon(2, imageIconForBackpack)
+                setImageIcon(2, imageIconForBackpack, 0)
                 true
             }
 
             3 -> {
                 imageIconForBackpack = viewModel.setPutOn(3, null)
-                setImageIcon(3, imageIconForBackpack)
+                setImageIcon(3, imageIconForBackpack, 0)
                 true
             }
 
@@ -388,13 +403,27 @@ class BackpackDialogFragment : DialogFragment() {
         }
     }
 
-    private fun setImageIcon(index: Int, imageItem: Int) {
+    private fun setImageIcon(index: Int, imageItem: Int, countItem: Int) {
         when (index) {
             // the icons are for put on
             0 -> binding.iconWeaponForItemImageView.setImageResource(imageItem)
-            1 -> binding.iconArrowForItemImageView.setImageResource(imageItem)
+            1 -> {
+                binding.iconArrowForItemImageView.setImageResource(imageItem)
+                if (countItem == 0) {
+                    binding.countItemArrowForItemTextView.setText(R.string.empty_text)
+                } else {
+                    binding.countItemArrowForItemTextView.text = "$countItem ${BonfireDialogFragment.COUNT_ITEM_TEXT}"
+                }
+            }
             2 -> binding.iconArmorForItemImageView.setImageResource(imageItem)
-            3 -> binding.iconScrollForItemImageView.setImageResource(imageItem)
+            3 -> {
+                binding.iconScrollForItemImageView.setImageResource(imageItem)
+                if (countItem == 0) {
+                    binding.countItemScrollForItemTextView.setText(R.string.empty_text)
+                } else {
+                    binding.countItemScrollForItemTextView.text = "$countItem ${BonfireDialogFragment.COUNT_ITEM_TEXT}"
+                }
+            }
         }
 
         isEmptyBackpack()

@@ -83,7 +83,9 @@ class BonfireDialogFragment() : DialogFragment() {
                 }
 
                 val putIntoCook = viewModel.setForCook(index, itemsForCook, viewModel.player.value!!.backpack)
-                setImageIcon(index, putIntoCook)
+                val correctedIndex = hashMapOf(4 to 0, 5 to 1)
+
+                setImageIcon(index, putIntoCook, viewModel.currentLocation.value!!.build!!.placeForCook!![correctedIndex[index]!!]!!.count)
                 loadBackpack()
                 adapter.notifyDataSetChanged()
             }
@@ -91,7 +93,7 @@ class BonfireDialogFragment() : DialogFragment() {
             override fun setAntiThief(itemPhosphorus: ItemsSlot) {
                 val putAntiThief = viewModel.setAtiThief(7, itemPhosphorus, viewModel.player.value!!.backpack)
 
-                setImageIcon(7, putAntiThief)
+                setImageIcon(7, putAntiThief, viewModel.currentLocation.value!!.build!!.placeForAntiThief[0]!!.count)
                 loadBackpack()
                 adapter.notifyDataSetChanged()
             }
@@ -137,6 +139,9 @@ class BonfireDialogFragment() : DialogFragment() {
         with(binding) {
             bonfireItemsRecyclerView.layoutManager = layoutManager
             bonfireItemsRecyclerView.adapter = adapter
+
+            loadAntiThiefProgressBar.max = viewModel.currentLocation.value!!.build!!.antiThief!!.maxPercent
+            loadCookFoodProgressBar.max = viewModel.currentLocation.value!!.build!!.cooking!!.maxPercent
 
             exitTextView.setOnClickListener {
                 dismiss()
@@ -199,14 +204,14 @@ class BonfireDialogFragment() : DialogFragment() {
         }
     }
 
-
     private fun loadAntiThief() {
+        val placeForAntiThief = viewModel.getCurrentLocation().build!!.placeForAntiThief!!
         var antiThiefIndex = 7
-        for(index in viewModel.getCurrentLocation().build!!.placeForAntiThief.indices) {
-            if (viewModel.getCurrentLocation().build!!.placeForAntiThief[index] != null) {
-                setImageIcon(antiThiefIndex, viewModel.getCurrentLocation().build!!.placeForAntiThief[index]!!.item.imageId)
+        for(index in placeForAntiThief.indices) {
+            if (placeForAntiThief[index] != null) {
+                setImageIcon(antiThiefIndex, placeForAntiThief[index]!!.item.imageId, placeForAntiThief[index]!!.count)
             } else {
-                setImageIcon(antiThiefIndex, viewModel.getIconForItemPutOnResImageMap(antiThiefIndex))
+                setImageIcon(antiThiefIndex, viewModel.getIconForItemPutOnResImageMap(antiThiefIndex), 0)
             }
             antiThiefIndex++
         }
@@ -232,12 +237,13 @@ class BonfireDialogFragment() : DialogFragment() {
     }
 
     private fun loadCook() {
+        val placeForCook = viewModel.getCurrentLocation().build!!.placeForCook!!
         var cookIndex = 4
-        for (index in viewModel.getCurrentLocation().build!!.placeForCook!!.indices) {
-            if (viewModel.getCurrentLocation().build!!.placeForCook!![index] != null) {
-                setImageIcon(cookIndex, viewModel.getCurrentLocation().build!!.placeForCook!![index]!!.item.imageId)
+        for (index in placeForCook.indices) {
+            if (placeForCook[index] != null) {
+                setImageIcon(cookIndex, placeForCook[index]!!.item.imageId, placeForCook[index]!!.count)
             } else {
-                setImageIcon(cookIndex, viewModel.getIconForItemPutOnResImageMap(cookIndex))
+                setImageIcon(cookIndex, viewModel.getIconForItemPutOnResImageMap(cookIndex), 0)
             }
             cookIndex++
         }
@@ -264,14 +270,50 @@ class BonfireDialogFragment() : DialogFragment() {
     }
 
 
-    private fun setImageIcon(index: Int, imageItem: Int) {
+    private fun setImageIcon(index: Int, imageItem: Int, countItem: Int) {
         when (index) {
-            4 -> binding.iconCookFoodForItemImageView.setImageResource(imageItem)
-            5 -> binding.iconWoodForItemImageView.setImageResource(imageItem)
-            6 -> binding.iconResultCookForItemImageView.setImageResource(imageItem)
-            7 -> binding.iconAntiThiefImageView.setImageResource(imageItem)
-            8 -> binding.iconResultAntiThiefForItemImageView.setImageResource(imageItem)
+            4 -> {
+                binding.iconCookFoodForItemImageView.setImageResource(imageItem)
+                if (countItem == 0) {
+                    binding.countItemCookFoodForItemTextView.setText(R.string.empty_text)
+                } else {
+                    binding.countItemCookFoodForItemTextView.text = "$countItem $COUNT_ITEM_TEXT"
+                }
+            }
+            5 -> {
+                binding.iconWoodForItemImageView.setImageResource(imageItem)
+                if (countItem == 0) {
+                    binding.countItemWoodForItemTextView.setText(R.string.empty_text)
+                } else {
+                    binding.countItemWoodForItemTextView.text = "$countItem $COUNT_ITEM_TEXT"
+                }
+            }
+            6 -> {
+                binding.iconResultCookForItemImageView.setImageResource(imageItem)
+                if (countItem == 0) {
+                    binding.countItemResultCookForItemTextView.setText(R.string.empty_text)
+                } else {
+                    binding.countItemResultCookForItemTextView.text = "$countItem $COUNT_ITEM_TEXT"
+                }
+            }
+            7 -> {
+                binding.iconAntiThiefImageView.setImageResource(imageItem)
+                if (countItem == 0) {
+                    binding.countItemAntiThiefTextView.setText(R.string.empty_text)
+                } else {
+                    binding.countItemAntiThiefTextView.text = "$countItem $COUNT_ITEM_TEXT"
+                }
+            }
+            8 -> {
+                binding.iconResultAntiThiefForItemImageView.setImageResource(imageItem)
+                if (countItem == 0) {
+                    binding.countItemResultAntiThiefForItemTextView.setText(R.string.empty_text)
+                } else {
+                    binding.countItemResultAntiThiefForItemTextView.text = "$countItem $COUNT_ITEM_TEXT"
+                }
+            }
         }
+        adapter.notifyDataSetChanged()
     }
 
     private fun onLongClick(index: Int): Boolean {
@@ -279,31 +321,31 @@ class BonfireDialogFragment() : DialogFragment() {
         return when (index) {
             4 -> {
                 imageIconForBackpack = viewModel.setForCook(4, null, viewModel.player.value!!.backpack)
-                setImageIcon(4, imageIconForBackpack)
+                setImageIcon(4, imageIconForBackpack, 0)
                 true
             }
 
             5 -> {
                 imageIconForBackpack = viewModel.setForCook(5, null, viewModel.player.value!!.backpack)
-                setImageIcon(5, imageIconForBackpack)
+                setImageIcon(5, imageIconForBackpack, 0)
                 true
             }
 
             6 -> {
                 imageIconForBackpack = viewModel.setForCook(6, null, viewModel.player.value!!.backpack)
-                setImageIcon(6, imageIconForBackpack)
+                setImageIcon(6, imageIconForBackpack, 0)
                 true
             }
 
             7 -> {
                 imageIconForBackpack = viewModel.setAtiThief(7, null, viewModel.player.value!!.backpack)
-                setImageIcon(7, imageIconForBackpack)
+                setImageIcon(7, imageIconForBackpack, 0)
                 true
             }
 
             8 -> {
                 imageIconForBackpack = viewModel.setAtiThief(8, null, viewModel.player.value!!.backpack)
-                setImageIcon(8, imageIconForBackpack)
+                setImageIcon(8, imageIconForBackpack, 0)
                 true
             }
             else -> {
@@ -315,6 +357,9 @@ class BonfireDialogFragment() : DialogFragment() {
     companion object {
         @JvmStatic
         val CELL_BONFIRE_COLUMNS = 8
+
+        @JvmStatic
+        val COUNT_ITEM_TEXT = "шт."
     }
 
 

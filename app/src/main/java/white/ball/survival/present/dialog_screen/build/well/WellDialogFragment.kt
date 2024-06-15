@@ -13,6 +13,7 @@ import kotlinx.coroutines.launch
 import white.ball.survival.R
 import white.ball.survival.databinding.FragmentWellDialogBinding
 import white.ball.survival.present.dialog_screen.backpack.view_model.BackpackViewModel
+import white.ball.survival.present.dialog_screen.build.bonfire.BonfireDialogFragment
 import white.ball.survival.present.view_model_factory.viewModelCreator
 
 class WellDialogFragment : DialogFragment() {
@@ -32,9 +33,6 @@ class WellDialogFragment : DialogFragment() {
             it.playerAction
         )
     }
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val view = View.inflate(activity, R.layout.fragment_well_dialog, null)
@@ -43,23 +41,21 @@ class WellDialogFragment : DialogFragment() {
         binding.loadExtractWaterProgressBar.max = viewModel.currentLocation.value!!.build!!.extractingWater!!.maxPercent
 
         with(binding) {
+            loadAntiThiefProgressBar.max = viewModel.currentLocation.value!!.build!!.antiThief!!.maxPercent
+            loadExtractWaterProgressBar.max = viewModel.currentLocation.value!!.build!!.extractingWater!!.maxPercent
 
             exitTextView.setOnClickListener {
                 dismiss()
             }
-
-            binding.iconAntiThiefImageView.setOnClickListener {
+            iconAntiThiefImageView.setOnClickListener {
                 onLongClick(7)
             }
-
-            binding.iconResultAntiThiefForItemImageView.setOnClickListener {
+            iconResultAntiThiefForItemImageView.setOnClickListener {
                 onLongClick(8)
             }
-
-            binding.iconResultWaterImageView.setOnClickListener {
+            iconResultWaterImageView.setOnClickListener {
                 onLongClick(9)
             }
-
             destroyBuildButton.setOnClickListener {
                 viewModel.setBuild(null)
             }
@@ -93,7 +89,7 @@ class WellDialogFragment : DialogFragment() {
         val indicatorAntiThief = viewModel.currentLocation.value!!.build!!.antiThief
         antiThiefFinishBoolean = true
         antiThiefStartJob = lifecycleScope.launch {
-            while (indicatorAntiThief!!.percent != indicatorAntiThief!!.maxPercent) {
+            while (indicatorAntiThief!!.percent != indicatorAntiThief.maxPercent) {
                 binding.loadAntiThiefProgressBar.progress = indicatorAntiThief.percent
                 delay(1000L)
             }
@@ -110,12 +106,13 @@ class WellDialogFragment : DialogFragment() {
     }
 
     private fun loadAntiThief() {
+        val placeAntiThief = viewModel.getCurrentLocation().build!!.placeForAntiThief
         var antiThiefIndex = 7
-        for(index in viewModel.getCurrentLocation().build!!.placeForAntiThief.indices) {
-            if (viewModel.getCurrentLocation().build!!.placeForAntiThief[index] != null) {
-                setImageIcon(antiThiefIndex, viewModel.getCurrentLocation().build!!.placeForAntiThief[index]!!.item.imageId)
+        for(index in placeAntiThief.indices) {
+            if (placeAntiThief[index] != null) {
+                setImageIcon(antiThiefIndex, placeAntiThief[index]!!.item.imageId, placeAntiThief[index]!!.count)
             } else {
-                setImageIcon(antiThiefIndex, viewModel.getIconForItemPutOnResImageMap(antiThiefIndex))
+                setImageIcon(antiThiefIndex, viewModel.getIconForItemPutOnResImageMap(antiThiefIndex), 0)
             }
             antiThiefIndex++
         }
@@ -144,18 +141,40 @@ class WellDialogFragment : DialogFragment() {
         val placeWater = viewModel.getCurrentLocation().build!!.placeForWater
         val indexWater = 9
         if (viewModel.getCurrentLocation().build!!.placeForWater != null) {
-            setImageIcon(indexWater, placeWater!!.item.imageId)
+            setImageIcon(indexWater, placeWater!!.item.imageId, placeWater.count)
         } else {
-            setImageIcon(indexWater, viewModel.getIconForItemPutOnResImageMap(indexWater))
+            setImageIcon(indexWater, viewModel.getIconForItemPutOnResImageMap(indexWater), 0)
         }
     }
 
-    private fun setImageIcon(index: Int, imageItem: Int) {
+    private fun setImageIcon(index: Int, imageItem: Int, countItem: Int) {
         when (index) {
-            7 -> binding.iconAntiThiefImageView.setImageResource(imageItem)
-            8 -> binding.iconResultAntiThiefForItemImageView.setImageResource(imageItem)
-            9 -> binding.iconResultWaterImageView.setImageResource(imageItem)
+            7 -> {
+                binding.iconAntiThiefImageView.setImageResource(imageItem)
+                if (countItem == 0) {
+                    binding.countItemAntiThiefTextView.setText(R.string.empty_text)
+                } else {
+                    binding.countItemAntiThiefTextView.text = "$countItem ${BonfireDialogFragment.COUNT_ITEM_TEXT}"
+                }
+            }
+            8 -> {
+                binding.iconResultAntiThiefForItemImageView.setImageResource(imageItem)
+                if (countItem == 0) {
+                    binding.countItemResultAntiThiefForItemTextView.setText(R.string.empty_text)
+                } else {
+                    binding.countItemResultAntiThiefForItemTextView.text = "$countItem ${BonfireDialogFragment.COUNT_ITEM_TEXT}"
+                }
+            }
+            9 -> {
+                binding.iconResultWaterImageView.setImageResource(imageItem)
+                if (countItem == 0) {
+                    binding.countItemResultWaterTextView.setText(R.string.empty_text)
+                } else {
+                    binding.countItemResultWaterTextView.text = "$countItem ${BonfireDialogFragment.COUNT_ITEM_TEXT}"
+                }
+            }
         }
+
     }
 
     private fun onLongClick(index: Int): Boolean {
@@ -163,18 +182,18 @@ class WellDialogFragment : DialogFragment() {
         return when (index) {
             7 -> {
                 imageIconForBackpack = viewModel.setAtiThief(7, null, viewModel.player.value!!.backpack)
-                setImageIcon(7, imageIconForBackpack)
+                setImageIcon(7, imageIconForBackpack, 0)
                 true
             }
 
             8 -> {
                 imageIconForBackpack = viewModel.setAtiThief(8, null, viewModel.player.value!!.backpack)
-                setImageIcon(8, imageIconForBackpack)
+                setImageIcon(8, imageIconForBackpack, 0)
                 true
             }
             9 -> {
                 imageIconForBackpack = viewModel.setExtractWater(9, viewModel.player.value!!.backpack)
-                setImageIcon(9, imageIconForBackpack)
+                setImageIcon(9, imageIconForBackpack, 0)
                 true
             }
             else -> {

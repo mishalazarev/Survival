@@ -71,16 +71,41 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/caption_anti_thief_text_view">
 
-                <ImageView
-                    android:id="@+id/icon_anti_thief_image_view"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/wrapper_anti_thief_constraint_layout"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginStart="5dp"
-                    android:background="@drawable/border_for_item"
-                    android:padding="3dp"
-                    android:src="@drawable/icon_gem_for_item"
+                    android:layout_margin="2dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/icon_anti_thief_image_view"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/border_for_item"
+                        android:padding="3dp"
+                        android:src="@drawable/icon_gem_for_item"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/count_item_anti_thief_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:gravity="center"
+                        android:text="@string/count_item"
+                        android:textColor="#E3DFDF"
+                        android:textSize="10sp"
+                        android:textStyle="italic|bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:ignore="SmallSp" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 <androidx.core.widget.ContentLoadingProgressBar
                     android:id="@+id/load_anti_thief_progress_bar"
@@ -93,17 +118,39 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/icon_result_anti_thief_for_item_image_view"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/wrapper_result_anti_thief_for_item_constraint_layout"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginStart="5dp"
-                    android:background="@drawable/border_for_item"
-                    android:padding="3dp"
+                    android:layout_margin="2dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
 
+                    <ImageView
+                        android:id="@+id/icon_result_anti_thief_for_item_image_view"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/border_for_item"
+                        android:padding="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
+                    <TextView
+                        android:id="@+id/count_item_result_anti_thief_for_item_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:gravity="center"
+                        android:text="@string/count_item"
+                        android:textColor="#E3DFDF"
+                        android:textSize="10sp"
+                        android:textStyle="italic|bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:ignore="SmallSp" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
@@ -131,26 +178,72 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/caption_cook_text_view">
 
-                <ImageView
-                    android:id="@+id/icon_cook_food_for_item_image_view"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/wrapper_cook_food_for_item_constraint_layout"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:background="@drawable/border_for_item"
-                    android:padding="5dp"
-                    android:src="@drawable/icon_meat_for_item"
+                    android:layout_margin="2dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:id="@+id/icon_wood_for_item_image_view"
+                    <ImageView
+                        android:id="@+id/icon_cook_food_for_item_image_view"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/border_for_item"
+                        android:padding="5dp"
+                        android:src="@drawable/icon_meat_for_item"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/count_item_cook_food_for_item_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:gravity="center"
+                        android:text="@string/count_item"
+                        android:textColor="#E3DFDF"
+                        android:textSize="10sp"
+                        android:textStyle="italic|bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:ignore="SmallSp" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/wrapper_wood_for_item_constraint_layout"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginStart="5dp"
-                    android:background="@drawable/border_for_item"
-                    android:padding="3dp"
-                    android:src="@drawable/icon_wood_for_item"
-                    app:layout_constraintStart_toEndOf="@+id/icon_cook_food_for_item_image_view"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_margin="2dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/wrapper_cook_food_for_item_constraint_layout"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/icon_wood_for_item_image_view"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/border_for_item"
+                        android:padding="3dp"
+                        android:src="@drawable/icon_wood_for_item"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/count_item_wood_for_item_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:gravity="center"
+                        android:text="@string/count_item"
+                        android:textColor="#E3DFDF"
+                        android:textSize="10sp"
+                        android:textStyle="italic|bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:ignore="SmallSp" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.core.widget.ContentLoadingProgressBar
                     android:id="@+id/load_cook_food_progress_bar"
@@ -163,16 +256,41 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/icon_result_cook_image_view"
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/wrapper_result_cook_for_item_constraint_layout"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginStart="5dp"
-                    android:background="@drawable/border_for_item"
-                    android:padding="3dp"
+                    android:layout_margin="2dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
 
+                    <ImageView
+                        android:id="@+id/icon_result_cook_for_item_image_view"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/border_for_item"
+                        android:padding="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/count_item_result_cook_for_item_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:gravity="center"
+                        android:text="@string/count_item"
+                        android:textColor="#E3DFDF"
+                        android:textSize="10sp"
+                        android:textStyle="italic|bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:ignore="SmallSp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
@@ -209,6 +327,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/wrapper_result_water_constraint_layout"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="2dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
                 <ImageView
                     android:id="@+id/icon_result_water_image_view"
                     android:layout_width="50dp"
@@ -218,6 +345,21 @@
                     android:padding="3dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/count_item_result_water_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:gravity="center"
+                        android:text="@string/count_item"
+                        android:textColor="#E3DFDF"
+                        android:textSize="10sp"
+                        android:textStyle="italic|bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:ignore="SmallSp" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -271,6 +413,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/wrapper_result_fruit_constraint_layout"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="2dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
                 <ImageView
                     android:id="@+id/icon_result_fruit_image_view"
                     android:layout_width="50dp"
@@ -280,6 +431,21 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/count_item_result_fruit_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:gravity="center"
+                        android:text="@string/count_item"
+                        android:textColor="#E3DFDF"
+                        android:textSize="10sp"
+                        android:textStyle="italic|bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:ignore="SmallSp" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

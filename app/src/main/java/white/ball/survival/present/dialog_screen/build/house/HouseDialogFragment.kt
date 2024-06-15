@@ -25,11 +25,11 @@ import white.ball.survival.domain.repository.ItemUseRepository
 import white.ball.survival.present.dialog_screen.backpack.BackpackDialogFragment
 import white.ball.survival.present.dialog_screen.backpack.adapter.BackpackAdapter
 import white.ball.survival.present.dialog_screen.backpack.view_model.BackpackViewModel
+import white.ball.survival.present.dialog_screen.build.bonfire.BonfireDialogFragment
 import white.ball.survival.present.screen.main_screen.game_play.fight.FightFragment.Companion.ONE_SECOND
 import white.ball.survival.present.view_model_factory.viewModelCreator
 
 class HouseDialogFragment : DialogFragment() {
-
 
     private lateinit var binding: FragmentHouseDialogBinding
 
@@ -74,7 +74,6 @@ class HouseDialogFragment : DialogFragment() {
     private lateinit var scrollPutOnSound: MediaPlayer
     private lateinit var openShellSound: MediaPlayer
 
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val view = View.inflate(activity, R.layout.fragment_house_dialog, null)
         val dialog = AlertDialog.Builder(activity)
@@ -92,6 +91,9 @@ class HouseDialogFragment : DialogFragment() {
         openShellSound = MediaPlayer.create(requireContext(), R.raw.to_open_shell)
 
         with(binding) {
+            loadCookFoodProgressBar.max = viewModel.currentLocation.value!!.build!!.cooking!!.maxPercent
+            loadExtractWaterProgressBar.max = viewModel.currentLocation.value!!.build!!.extractingWater!!.maxPercent
+            loadAntiThiefProgressBar.max = viewModel.currentLocation.value!!.build!!.antiThief!!.maxPercent
             loadIndicatorGrownPlant()
 
             exitTextView.setOnClickListener {
@@ -106,7 +108,7 @@ class HouseDialogFragment : DialogFragment() {
                 onLongClick(5)
             }
 
-            iconResultCookImageView.setOnClickListener {
+            iconResultCookForItemImageView.setOnClickListener {
                 onLongClick(6)
             }
 
@@ -251,8 +253,13 @@ class HouseDialogFragment : DialogFragment() {
                     else -> throw IllegalArgumentException("Unknown number")
                 }
 
+                val correctedIndex = if (ItemUse.ARROW == itemsForPutOn.item.itemUse) {
+                    viewModel.player.value!!.placeForPutOn[1]!!.count
+                } else {
+                    0
+                }
                 val putOnImage = viewModel.setPutOn(index, itemsForPutOn)
-                setImageIcon(index, putOnImage)
+                setImageIcon(index, putOnImage, correctedIndex)
 
                 adapterBackpack.notifyDataSetChanged()
             }
@@ -265,13 +272,16 @@ class HouseDialogFragment : DialogFragment() {
                 }
 
                 val putIntoCook = viewModel.setForCook(index, itemsForCook, viewModel.player.value!!.backpack)
-                setImageIcon(index, putIntoCook)
+                val correctedIndex = hashMapOf(4 to 0, 5 to 1)
+
+                setImageIcon(index, putIntoCook, viewModel.currentLocation.value!!.build!!.placeForCook!![correctedIndex[index]!!]!!.count)
 
                 adapterBackpack.notifyDataSetChanged()
             }
 
             override fun setAntiThief(itemPhosphorus: ItemsSlot) {
-                viewModel.setAtiThief(7, itemPhosphorus, viewModel.player.value!!.backpack)
+                val putAntiThief = viewModel.setAtiThief(7, itemPhosphorus, viewModel.player.value!!.backpack)
+                setImageIcon(7, putAntiThief, viewModel.currentLocation.value!!.build!!.placeForAntiThief[0]!!.count)
 
                 adapterBackpack.notifyDataSetChanged()
             }
@@ -419,12 +429,13 @@ class HouseDialogFragment : DialogFragment() {
     }
 
     private fun loadCook() {
+        val placeForCook = viewModel.getCurrentLocation().build!!.placeForCook!!
         var cookIndex = 4
-        for (index in viewModel.getCurrentLocation().build!!.placeForCook!!.indices) {
-            if (viewModel.getCurrentLocation().build!!.placeForCook!![index] != null) {
-                setImageIcon(cookIndex, viewModel.getCurrentLocation().build!!.placeForCook!![index]!!.item.imageId)
+        for (index in placeForCook.indices) {
+            if (placeForCook[index] != null) {
+                setImageIcon(cookIndex, placeForCook[index]!!.item.imageId, placeForCook[index]!!.count)
             } else {
-                setImageIcon(cookIndex, viewModel.getIconForItemPutOnResImageMap(cookIndex))
+                setImageIcon(cookIndex, viewModel.getIconForItemPutOnResImageMap(cookIndex), 0)
             }
             cookIndex++
         }
@@ -450,12 +461,13 @@ class HouseDialogFragment : DialogFragment() {
     }
 
     private fun loadAntiThief() {
+        val placeAntiThief = viewModel.getCurrentLocation().build!!.placeForAntiThief
         var antiThiefIndex = 7
-        for(index in viewModel.getCurrentLocation().build!!.placeForAntiThief.indices) {
-            if (viewModel.getCurrentLocation().build!!.placeForAntiThief[index] != null) {
-                setImageIcon(antiThiefIndex, viewModel.getCurrentLocation().build!!.placeForAntiThief[index]!!.item.imageId)
+        for(index in placeAntiThief.indices) {
+            if (placeAntiThief[index] != null) {
+                setImageIcon(antiThiefIndex, placeAntiThief[index]!!.item.imageId, placeAntiThief[index]!!.count)
             } else {
-                setImageIcon(antiThiefIndex, viewModel.getIconForItemPutOnResImageMap(antiThiefIndex))
+                setImageIcon(antiThiefIndex, viewModel.getIconForItemPutOnResImageMap(antiThiefIndex), 0)
             }
             antiThiefIndex++
         }
@@ -484,9 +496,10 @@ class HouseDialogFragment : DialogFragment() {
         val placeWater = viewModel.getCurrentLocation().build!!.placeForWater
         val indexWater = 9
         if (viewModel.getCurrentLocation().build!!.placeForWater != null) {
-            setImageIcon(indexWater, placeWater!!.item.imageId)
+            binding.loadGrowPlantProgressBar.max = viewModel.currentLocation.value!!.build!!.plant!!.indicatorGrow.maxPercent
+            setImageIcon(indexWater, placeWater!!.item.imageId, placeWater!!.count)
         } else {
-            setImageIcon(indexWater, viewModel.getIconForItemPutOnResImageMap(indexWater))
+            setImageIcon(indexWater, viewModel.getIconForItemPutOnResImageMap(indexWater), 0)
         }
     }
 
@@ -515,12 +528,11 @@ class HouseDialogFragment : DialogFragment() {
     private fun loadGarden() {
         val placeForGarden = viewModel.getCurrentLocation().build!!.placeForFruit
 
-
         var growPlantIndex = 10
         if (placeForGarden != null) {
-            setImageIcon(growPlantIndex, placeForGarden.item.imageId)
+            setImageIcon(growPlantIndex, placeForGarden.item.imageId, placeForGarden.count)
         } else {
-            setImageIcon(growPlantIndex, viewModel.getIconForItemPutOnResImageMap(growPlantIndex))
+            setImageIcon(growPlantIndex, viewModel.getIconForItemPutOnResImageMap(growPlantIndex), 0)
         }
         growPlantIndex++
 
@@ -537,16 +549,66 @@ class HouseDialogFragment : DialogFragment() {
         }
     }
 
-    private fun setImageIcon(index: Int, imageItem: Int) {
+    private fun setImageIcon(index: Int, imageItem: Int, countItem: Int) {
         when (index) {
-            4 -> binding.iconCookFoodForItemImageView.setImageResource(imageItem)
-            5 -> binding.iconWoodForItemImageView.setImageResource(imageItem)
-            6 -> binding.iconResultCookImageView.setImageResource(imageItem)
-            7 -> binding.iconAntiThiefImageView.setImageResource(imageItem)
-            8 -> binding.iconResultAntiThiefForItemImageView.setImageResource(imageItem)
-            9 -> binding.iconResultWaterImageView.setImageResource(imageItem)
-            10 -> binding.iconResultFruitImageView.setImageResource(imageItem)
+            4 -> {
+                binding.iconCookFoodForItemImageView.setImageResource(imageItem)
+                if (countItem == 0) {
+                    binding.countItemCookFoodForItemTextView.setText(R.string.empty_text)
+                } else {
+                    binding.countItemCookFoodForItemTextView.text = "$countItem ${BonfireDialogFragment.COUNT_ITEM_TEXT}"
+                }
+            }
+            5 -> {
+                binding.iconWoodForItemImageView.setImageResource(imageItem)
+                if (countItem == 0) {
+                    binding.countItemWoodForItemTextView.setText(R.string.empty_text)
+                } else {
+                    binding.countItemWoodForItemTextView.text = "$countItem ${BonfireDialogFragment.COUNT_ITEM_TEXT}"
+                }
+            }
+            6 -> {
+                binding.iconResultCookForItemImageView.setImageResource(imageItem)
+                if (countItem == 0) {
+                    binding.countItemResultCookForItemTextView.setText(R.string.empty_text)
+                } else {
+                    binding.countItemResultCookForItemTextView.text = "$countItem ${BonfireDialogFragment.COUNT_ITEM_TEXT}"
+                }
+            }
+            7 -> {
+                binding.iconAntiThiefImageView.setImageResource(imageItem)
+                if (countItem == 0) {
+                    binding.countItemAntiThiefTextView.setText(R.string.empty_text)
+                } else {
+                    binding.countItemAntiThiefTextView.text = "$countItem ${BonfireDialogFragment.COUNT_ITEM_TEXT}"
+                }
+            }
+            8 -> {
+                binding.iconResultAntiThiefForItemImageView.setImageResource(imageItem)
+                if (countItem == 0) {
+                    binding.countItemResultAntiThiefForItemTextView.setText(R.string.empty_text)
+                } else {
+                    binding.countItemResultAntiThiefForItemTextView.text = "$countItem ${BonfireDialogFragment.COUNT_ITEM_TEXT}"
+                }
+            }
+            9 -> {
+                binding.iconResultWaterImageView.setImageResource(imageItem)
+                if (countItem == 0) {
+                    binding.countItemResultWaterTextView.setText(R.string.empty_text)
+                } else {
+                    binding.countItemResultWaterTextView.text = "$countItem ${BonfireDialogFragment.COUNT_ITEM_TEXT}"
+                }
+            }
+            10 -> {
+                binding.iconResultFruitImageView.setImageResource(imageItem)
+                if (countItem == 0) {
+                    binding.countItemResultFruitTextView.setText(R.string.empty_text)
+                } else {
+                    binding.countItemResultFruitTextView.text = "$countItem ${BonfireDialogFragment.COUNT_ITEM_TEXT}"
+                }
+            }
         }
+        adapterBackpack.notifyDataSetChanged()
     }
 
     private fun onLongClick(index: Int): Boolean {
@@ -554,37 +616,37 @@ class HouseDialogFragment : DialogFragment() {
         return when (index) {
             4 -> {
                 imageIconForBackpack = viewModel.setForCook(4, null, viewModel.player.value!!.backpack)
-                setImageIcon(4, imageIconForBackpack)
+                setImageIcon(4, imageIconForBackpack, 0)
                 true
             }
             5 -> {
                 imageIconForBackpack = viewModel.setForCook(5, null, viewModel.player.value!!.backpack)
-                setImageIcon(5, imageIconForBackpack)
+                setImageIcon(5, imageIconForBackpack, 0)
                 true
             }
             6 -> {
                 imageIconForBackpack = viewModel.setForCook(6, null, viewModel.player.value!!.backpack)
-                setImageIcon(6, imageIconForBackpack)
+                setImageIcon(6, imageIconForBackpack, 0)
                 true
             }
             7 -> {
                 imageIconForBackpack = viewModel.setAtiThief(7, null, viewModel.player.value!!.backpack)
-                setImageIcon(7, imageIconForBackpack)
+                setImageIcon(7, imageIconForBackpack, 0)
                 true
             }
             8 -> {
                 imageIconForBackpack = viewModel.setAtiThief(8, null, viewModel.player.value!!.backpack)
-                setImageIcon(8, imageIconForBackpack)
+                setImageIcon(8, imageIconForBackpack, 0)
                 true
             }
             9 -> {
                 imageIconForBackpack = viewModel.setExtractWater(9, viewModel.player.value!!.backpack)
-                setImageIcon(9, imageIconForBackpack)
+                setImageIcon(9, imageIconForBackpack, 0)
                 true
             }
             10 -> {
                 imageIconForBackpack = viewModel.setPlantFruit(10)
-                setImageIcon(10, imageIconForBackpack)
+                setImageIcon(10, imageIconForBackpack, 0)
                 true
             }
             else -> {

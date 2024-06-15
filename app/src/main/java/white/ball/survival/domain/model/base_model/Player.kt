@@ -26,7 +26,7 @@ data class Player(
 
     var news: MutableList<News> = mutableListOf(),
     var backpack: MutableList<ItemsSlot> = mutableListOf(ItemsSlot(Item.FLASK_WITH_WATER, 10) ,ItemsSlot(WoodHouse(), 1), ItemsSlot(Well(), 1), ItemsSlot(Item.PHOSPHORUS_DIM, 10),
-        ItemsSlot(Bonfire(), 1),ItemsSlot(Weapon.KATANA,1), ItemsSlot(Item.SEED_IN_SHELL,10), ItemsSlot(Item.SCROLL, 1),
+        ItemsSlot(Bonfire(), 1),ItemsSlot(Weapon.KATANA,1), ItemsSlot(Item.SEED_IN_SHELL,10), ItemsSlot(Item.SCROLL, 1), ItemsSlot(Weapon.ARROW, 10),
         ItemsSlot(Item.LARGE_FLASK_WITH_WATER, 10), ItemsSlot(Item.MEAT_RAW, 10), ItemsSlot(Item.PHOSPHORUS_BRIGHT, 10),ItemsSlot(Item.WOOD, 10)),
     var placeForPutOn: MutableList<ItemsSlot?> = mutableListOf(null, null, null, null),
 

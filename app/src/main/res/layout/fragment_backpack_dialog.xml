@@ -90,6 +90,7 @@
                         app:layout_constraintStart_toEndOf="@+id/text_name_player_text_view"
                         app:layout_constraintTop_toTopOf="@+id/text_name_player_text_view" />
 
+
                     <LinearLayout
                         android:id="@+id/equipment_linear_layout"
                         android:layout_width="match_parent"
@@ -98,6 +99,7 @@
                         android:background="@drawable/wrapper_block_dialog_fragment"
                         android:gravity="center"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/text_name_player_text_view">
 
@@ -110,13 +112,37 @@
                             android:padding="5dp"
                             android:src="@drawable/icon_weapon_for_item" />
 
-                        <ImageView
-                            android:id="@+id/icon_arrow_for_item_image_view"
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/wrapper_arrow_for_item_constraint_layout"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:layout_margin="10dp"
-                            android:background="@drawable/border_for_item"
-                            android:src="@drawable/icon_arrow_for_item" />
+                            android:layout_margin="2dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/icon_arrow_for_item_image_view"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:background="@drawable/border_for_item"
+                                android:src="@drawable/icon_arrow_for_item"
+                                app:layout_constraintStart_toStartOf="parent" />
+
+                            <TextView
+                                android:id="@+id/count_item_arrow_for_item_text_view"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="2dp"
+                                android:gravity="center"
+                                android:text="@string/count_item"
+                                android:textColor="#E3DFDF"
+                                android:textSize="10sp"
+                                android:textStyle="italic|bold"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                tools:ignore="SmallSp" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <ImageView
                             android:id="@+id/icon_armor_for_item_image_view"
@@ -127,16 +153,40 @@
                             android:padding="3dp"
                             android:src="@drawable/icon_armor_for_item" />
 
-                        <ImageView
-                            android:id="@+id/icon_scroll_for_item_image_view"
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/wrapper_scroll_for_item_constraint_layout"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:layout_margin="10dp"
-                            android:background="@drawable/border_for_item"
-                            android:padding="8dp"
-                            android:src="@drawable/icon_scroll_for_item" />
-                    </LinearLayout>
+                            android:layout_margin="2dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
 
+                            <ImageView
+                                android:id="@+id/icon_scroll_for_item_image_view"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:background="@drawable/border_for_item"
+                                android:padding="8dp"
+                                android:src="@drawable/icon_scroll_for_item"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/count_item_scroll_for_item_text_view"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="2dp"
+                                android:gravity="center"
+                                android:text="@string/count_item"
+                                android:textColor="#E3DFDF"
+                                android:textSize="10sp"
+                                android:textStyle="italic|bold"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                tools:ignore="SmallSp" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
 
                     <white.ball.survival.present.dialog_screen.backpack.progress_bar.ProgressBar
                         android:id="@+id/indicator_health_progress_bar"
@@ -355,15 +405,15 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_weight="0.5"
                     android:layout_height="match_parent"
+                    android:layout_weight="0.5"
                     android:background="@drawable/body_dialog_fragment">
 
                     <LinearLayout
-                        android:layout_margin="10dp"
                         android:id="@+id/wrapper_backpack_linear_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
                         android:background="@drawable/wrapper_block_dialog_fragment"
                         android:padding="3dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -380,7 +430,6 @@
                     </LinearLayout>
 
                     <TextView
-                        android:visibility="invisible"
                         android:id="@+id/caption_empty_backpack_text_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -390,6 +439,7 @@
                         android:textAllCaps="true"
                         android:textSize="24sp"
                         android:textStyle="bold|italic"
+                        android:visibility="invisible"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
