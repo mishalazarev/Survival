@@ -2,7 +2,7 @@ package white.ball.survival.domain.service
 
 import white.ball.survival.R
 import white.ball.survival.domain.convertor.UIRepository
-import white.ball.survival.domain.model.News.News
+import white.ball.survival.domain.model.News.NewsNotification
 import white.ball.survival.domain.model.animal.Animal
 import white.ball.survival.domain.model.base_model.Item
 import white.ball.survival.domain.model.base_model.Player
@@ -39,7 +39,7 @@ class InteractionWithEnvironment(
     private val listenersCurrentLocation = mutableListOf<CurrentLocationListener>()
 
     private var currentAnimals: List<Animal> = mutableListOf()
-    private val news = News()
+    private val mNewsNotification = NewsNotification()
 
     init {
         loadMap(locationList)
@@ -65,7 +65,7 @@ class InteractionWithEnvironment(
 
     }
 
-    override fun setForCook(index: Int, newItemsForCook: ItemsSlot?, backpackByPlayer: MutableList<ItemsSlot>, newsList: MutableList<News>): Int {
+    override fun setForCook(index: Int, newItemsForCook: ItemsSlot?, backpackByPlayer: MutableList<ItemsSlot>, newsNotificationList: MutableList<NewsNotification>): Int {
         val currentPlaceForCook = currentLocation.build!!.placeForCook
         val correctIndex = when (index) {
             4 -> {
@@ -86,13 +86,13 @@ class InteractionWithEnvironment(
             return when (newItemsForCook.item.itemUse) {
                 ItemUse.FOR_COOK -> {
                     equalizeCountOfItems(currentPlaceForCook[0]!!, newItemsForCook, backpackByPlayer)
-                    startCooking(newsList)
+                    startCooking(newsNotificationList)
                     newItemsForCook.item.imageId
                 }
 
                 ItemUse.FOR_FIRE -> {
                     equalizeCountOfItems(currentPlaceForCook[1]!!, newItemsForCook, backpackByPlayer)
-                    startCooking(newsList)
+                    startCooking(newsNotificationList)
                     newItemsForCook.item.imageId
                 }
 
@@ -106,13 +106,13 @@ class InteractionWithEnvironment(
         } else if (currentPlaceForCook[correctIndex] == null && newItemsForCook != null) {
             currentPlaceForCook[correctIndex] = newItemsForCook
             backpackByPlayer.remove(newItemsForCook)
-            startCooking(newsList)
+            startCooking(newsNotificationList)
             return newItemsForCook.item.imageId
         }
         return uiRepository.getIconForItemResImage(index)
     }
 
-    override fun setAntiThief(index: Int, itemPhosphorus: ItemsSlot?, backpackByPlayer: MutableList<ItemsSlot>, newsList: MutableList<News>): Int {
+    override fun setAntiThief(index: Int, itemPhosphorus: ItemsSlot?, backpackByPlayer: MutableList<ItemsSlot>, newsNotificationList: MutableList<NewsNotification>): Int {
         val currentPlaceForAntiThief = currentLocation.build?.placeForAntiThief
         val correctIndex = if (index == 7) {
             0
@@ -128,12 +128,12 @@ class InteractionWithEnvironment(
                 itemPhosphorus.count = currentPlaceForAntiThief[correctIndex]!!.count - 10
                 currentPlaceForAntiThief[correctIndex]!!.count -= itemPhosphorus.count
                 notifyLocationsChanges()
-                startAntiThief(newsList)
+                startAntiThief(newsNotificationList)
                 return currentPlaceForAntiThief[correctIndex]!!.item.imageId
             } else if (currentPlaceForAntiThief[correctIndex]!!.count <= 10) {
                 backpackByPlayer.remove(itemPhosphorus)
                 notifyLocationsChanges()
-                startAntiThief(newsList)
+                startAntiThief(newsNotificationList)
                 return currentPlaceForAntiThief[correctIndex]!!.item.imageId
             }
         } else if (itemPhosphorus == null && currentPlaceForAntiThief?.get(correctIndex) != null) {
@@ -150,7 +150,7 @@ class InteractionWithEnvironment(
         return uiRepository.getIconForItemResImage(index)
     }
 
-    override fun setExtractWater(index: Int, backpackByPlayer: MutableList<ItemsSlot>, newsList: MutableList<News>): Int {
+    override fun setExtractWater(index: Int, backpackByPlayer: MutableList<ItemsSlot>, newsNotificationList: MutableList<NewsNotification>): Int {
        val currentPlaceForExtractWater = currentLocation.build!!.placeForWater
 
         return if (currentPlaceForExtractWater != null) {
@@ -162,7 +162,7 @@ class InteractionWithEnvironment(
         }
     }
 
-    override fun setPlantFruit(index: Int, backpackByPlayer: MutableList<ItemsSlot>, newsList: MutableList<News>): Int {
+    override fun setPlantFruit(index: Int, backpackByPlayer: MutableList<ItemsSlot>, newsNotificationList: MutableList<NewsNotification>): Int {
         val currentPlaceForDrinkOfWater = currentLocation.build!!.placeForFruit
 
 
@@ -175,7 +175,7 @@ class InteractionWithEnvironment(
         return uiRepository.getIconForItemResImage(index)
     }
 
-    override fun growPlant(seedItem: ItemsSlot, backpackByPlayer: MutableList<ItemsSlot>, newsList: MutableList<News>) {
+    override fun growPlant(seedItem: ItemsSlot, backpackByPlayer: MutableList<ItemsSlot>, newsNotificationList: MutableList<NewsNotification>) {
         val plantMap = hashMapOf(
             R.string.seed_aloe to AloePlant(),
             R.string.seed_wheat to WheatPlant(),
@@ -184,17 +184,17 @@ class InteractionWithEnvironment(
             R.string.see_oak to OakTree())
 
         currentLocation.build!!.plant = plantMap[seedItem.item.nameItem]
-        startGrowingPlant(newsList)
+        startGrowingPlant(newsNotificationList)
 
         if (seedItem.count == 1) {
             backpackByPlayer.remove(seedItem)
         } else {
             seedItem.count -= 1
         }
-        newsList.add(0, News().plantWantsToDrink(uiRepository.getString(currentLocation.build!!.plant!!.namePlant)))
+        newsNotificationList.add(0, NewsNotification().plantWantsToDrink(uiRepository.getString(currentLocation.build!!.plant!!.namePlant)))
     }
 
-    override fun giveWaterForPlant(itemWater: ItemsSlot, backpackByPlayer: MutableList<ItemsSlot>, newsList: MutableList<News>) {
+    override fun giveWaterForPlant(itemWater: ItemsSlot, backpackByPlayer: MutableList<ItemsSlot>, newsNotificationList: MutableList<NewsNotification>) {
         if (itemWater.item.nameItem == Item.FLASK_WITH_WATER.nameItem) {
             if (itemWater.count == 1) {
                 backpackByPlayer.remove(itemWater)
@@ -213,19 +213,19 @@ class InteractionWithEnvironment(
 
     }
 
-    override fun destroyPlant(backpackByPlayer: MutableList<ItemsSlot>, newsList: MutableList<News>) {
+    override fun destroyPlant(backpackByPlayer: MutableList<ItemsSlot>, newsNotificationList: MutableList<NewsNotification>) {
         val plant = currentLocation.build!!.plant!!
         backpackByPlayer.addAll(plant.destroyPlant[plant.currentLevel])
         val nameItemsText:MutableList<String> = mutableListOf()
         plant.destroyPlant[plant.currentLevel].forEach {
             nameItemsText.add(uiRepository.getString(it.item.nameItem))
         }
-        newsList.add(0, News().getResource(plant.destroyPlant[plant.currentLevel], nameItemsText.toTypedArray()))
+        newsNotificationList.add(0, NewsNotification().getResource(plant.destroyPlant[plant.currentLevel], nameItemsText.toTypedArray()))
         currentLocation.build!!.plant = null
 
     }
 
-    override fun startCooking(newsList: MutableList<News>) {
+    override fun startCooking(newsNotificationList: MutableList<NewsNotification>) {
         val placeForCook = currentLocation.build?.placeForCook
         val indicatorCooking = currentLocation.build?.cooking
 
@@ -270,9 +270,9 @@ class InteractionWithEnvironment(
                     }
 
                     indicatorCooking.percent = 0
-                    newsList.add(
+                    newsNotificationList.add(
                         0,
-                        news.getFoodCookedNews(uiRepository.getString(placeForCook[2]!!.item.nameItem))
+                        mNewsNotification.getFoodCookedNews(uiRepository.getString(placeForCook[2]!!.item.nameItem))
                     )
                     notifyLocationsChanges()
                 } else {
@@ -283,7 +283,7 @@ class InteractionWithEnvironment(
         }
     }
 
-    override fun startAntiThief(newsList: MutableList<News>) {
+    override fun startAntiThief(newsNotificationList: MutableList<NewsNotification>) {
         val placeForAntiThief = currentLocation.build?.placeForAntiThief
         val indicatorAntiThief = currentLocation.build?.antiThief
 
@@ -303,7 +303,7 @@ class InteractionWithEnvironment(
                     placeForAntiThief[1]!!.count += 1
                 }
                 indicatorAntiThief.percent = 0
-                newsList.add(0, news.getPhosphorusDimNews())
+                newsNotificationList.add(0, mNewsNotification.getPhosphorusDimNews())
                 notifyLocationsChanges()
             } else {
                 indicatorAntiThief.percent += 1
@@ -311,7 +311,7 @@ class InteractionWithEnvironment(
         }
     }
 
-    override fun startExtractingWater(newsList: MutableList<News>) {
+    override fun startExtractingWater(newsNotificationList: MutableList<NewsNotification>) {
         val indicatorWaterExtracting = currentLocation.build?.extractingWater
         val placeForWater = currentLocation.build?.placeForWater
 
@@ -326,9 +326,9 @@ class InteractionWithEnvironment(
                 }
 
                 if (placeForWater?.count == 10) {
-                    newsList.add(0, news.wellIsFull())
+                    newsNotificationList.add(0, mNewsNotification.wellIsFull())
                 } else {
-                    newsList.add(0, news.waterExtract())
+                    newsNotificationList.add(0, mNewsNotification.waterExtract())
                 }
                 indicatorWaterExtracting.percent = 0
                 notifyLocationsChanges()
@@ -338,10 +338,10 @@ class InteractionWithEnvironment(
         }
     }
 
-    override fun startGrowingPlant(newsList: MutableList<News>) {
+    override fun startGrowingPlant(newsNotificationList: MutableList<NewsNotification>) {
         val plant = currentLocation.build?.plant
         val placeFruitOfPlant = currentLocation.build?.placeForFruit
-        val news = News()
+        val newsNotification = NewsNotification()
 
         if (currentLocation.build != null && plant != null && plant.isPlantWatered) {
             if (placeFruitOfPlant?.count == 10)  return
@@ -350,9 +350,9 @@ class InteractionWithEnvironment(
                     if (plant.currentLevel != plant.commonProcess.size - 1) {
                         plant.currentLevel += 1
                         if (plant.currentLevel == plant.commonProcess.size - 1 && plant.ability == PlantAbility.MONSTER) {
-                            newsList.add(0, news.plantCameToLive(uiRepository.getString(plant.namePlant)))
+                            newsNotificationList.add(0, newsNotification.plantCameToLive(uiRepository.getString(plant.namePlant)))
                         } else {
-                            newsList.add(0, news.plantWantsToDrink(uiRepository.getString(plant.namePlant)))
+                            newsNotificationList.add(0, newsNotification.plantWantsToDrink(uiRepository.getString(plant.namePlant)))
                         }
                     } else if (plant.currentLevel == plant.commonProcess.size - 1 && plant.ability == PlantAbility.
                         GIVE_FRUIT) {
@@ -361,9 +361,9 @@ class InteractionWithEnvironment(
                         } else if (placeFruitOfPlant.item.nameItem == plant.namePlant) {
                             placeFruitOfPlant.count += plant.fruit!!.count
                         }
-                        newsList.add(0, news.plantGiveFruits(uiRepository.getString(plant.namePlant)))
+                        newsNotificationList.add(0, newsNotification.plantGiveFruits(uiRepository.getString(plant.namePlant)))
                     } else if (plant.currentLevel == plant.commonProcess.size - 1 && plant.ability == PlantAbility.ADULT) {
-                        newsList.add(0, news.plantBecomeAdult(plant.namePlant))
+                        newsNotificationList.add(0, newsNotification.plantBecomeAdult(plant.namePlant))
                     }
 
                 plant.indicatorGrow.percent = 0

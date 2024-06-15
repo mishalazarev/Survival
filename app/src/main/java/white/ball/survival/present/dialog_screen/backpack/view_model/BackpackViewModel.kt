@@ -81,31 +81,31 @@ class BackpackViewModel(
     }
 
     fun setAtiThief(index: Int, itemPhosphorus: ItemsSlot?, backpackByPlayer: MutableList<ItemsSlot>): Int {
-        return interactionWithEnvironmentRepository.setAntiThief(index, itemPhosphorus, backpackByPlayer, player.value!!.news)
+        return interactionWithEnvironmentRepository.setAntiThief(index, itemPhosphorus, backpackByPlayer, player.value!!.newsNotifications)
     }
 
     fun setForCook(index: Int, itemsForCook: ItemsSlot?, backpackByPlayer: MutableList<ItemsSlot>): Int {
-        return interactionWithEnvironmentRepository.setForCook(index, itemsForCook, backpackByPlayer, player.value!!.news)
+        return interactionWithEnvironmentRepository.setForCook(index, itemsForCook, backpackByPlayer, player.value!!.newsNotifications)
     }
 
     fun setExtractWater(index: Int, backpackByPlayer: MutableList<ItemsSlot>): Int {
-        return interactionWithEnvironmentRepository.setExtractWater(index, backpackByPlayer, player.value!!.news)
+        return interactionWithEnvironmentRepository.setExtractWater(index, backpackByPlayer, player.value!!.newsNotifications)
     }
 
     fun setPlantFruit(index: Int): Int {
-        return interactionWithEnvironmentRepository.setPlantFruit(index, player.value!!.backpack, player.value!!.news)
+        return interactionWithEnvironmentRepository.setPlantFruit(index, player.value!!.backpack, player.value!!.newsNotifications)
     }
 
     fun growPlant(itemSeed: ItemsSlot) {
-        interactionWithEnvironmentRepository.growPlant(itemSeed, player.value!!.backpack, player.value!!.news)
+        interactionWithEnvironmentRepository.growPlant(itemSeed, player.value!!.backpack, player.value!!.newsNotifications)
     }
 
     fun giveWaterForPlant(itemWater: ItemsSlot) {
-        interactionWithEnvironmentRepository.giveWaterForPlant(itemWater, player.value!!.backpack, player.value!!.news)
+        interactionWithEnvironmentRepository.giveWaterForPlant(itemWater, player.value!!.backpack, player.value!!.newsNotifications)
     }
 
     fun destroyPlant() {
-        interactionWithEnvironmentRepository.destroyPlant(player.value!!.backpack, player.value!!.news)
+        interactionWithEnvironmentRepository.destroyPlant(player.value!!.backpack, player.value!!.newsNotifications)
     }
 
     fun getIconForItemPutOnResImageMap(index: Int): Int {

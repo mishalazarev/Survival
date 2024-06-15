@@ -33,18 +33,18 @@ class NotificationDialogFragment : DialogFragment() {
         layoutManager.orientation = LinearLayoutManager.VERTICAL
 
         adapter = NotificationAdapter()
-        adapter.newsList = viewModel.getNewsList()
+        adapter.mNewsNotificationList = viewModel.getNewsList()
         binding.newsRecyclerView.layoutManager = layoutManager
         binding.newsRecyclerView.adapter = adapter
 
-        if (adapter.newsList.isEmpty()) {
+        if (adapter.mNewsNotificationList.isEmpty()) {
             binding.captionEmptyNewsTextView.visibility = View.VISIBLE
         }
 
         with(binding) {
             iconClearImageButton.setOnClickListener {
                 viewModel.clearNewsList()
-                adapter.newsList = viewModel.getNewsList()
+                adapter.mNewsNotificationList = viewModel.getNewsList()
                 adapter.notifyDataSetChanged()
                 captionEmptyNewsTextView.visibility = View.VISIBLE
             }

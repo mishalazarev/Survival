@@ -72,6 +72,13 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:id="@+id/section_news_up_date_text_view"
+                style="@style/section_link_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/section_news_up_date" />
+
+            <TextView
                 android:id="@+id/section_animals_text_view"
                 style="@style/section_link_section"
                 android:layout_width="match_parent"

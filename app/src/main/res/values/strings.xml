@@ -112,6 +112,7 @@
     <string name="caption_user_guide">Руководство пользователя</string>
     <string name="caption_location">Локация</string>
     <string name="caption_effect">Эффект</string>
+    <string name="section_news_up_date">Обновления</string>
     <string name="section_animals">Животные</string>
     <string name="section_plants">Растения</string>
     <string name="caption_nutrition">Сытость</string>
@@ -333,10 +334,24 @@
     <string name="find_out_information">О предмете</string>
     <string name="threw_it_away">Выбросить</string>
     <string name="threw_it_away_all_item">Выбросить все</string>
-    
+
     <!-- menu garden use -->
     <string name="give_water_plant">Полить</string>
     <string name="cut_down_plant">Срубить</string>
     <string name="about_plant">О растении</string>
+
+    <!-- new version -->
+    <string name="caption_1_1">Первое обновление</string>
+    <string name="date_1_1">16 июня 2024 года</string>
+    <string name="name_version_1_1">version 1.1</string>
+    <string name="main_text_1_1">Что появилось новенького:\n
+    - строительство зданий;\n
+    - выращивание растения;\n
+    - добыча воды в колодцах и в других зданий;\n
+    - новые виды семян;\n
+    - появились новые предметы, такие мука, хлеб...\n\n
+        Дальше будет интересней, но пока у меня нет возможности уделять достаточное время для этой игры, поэтому вынужден ее приостановить\n
+        Все можно изменить только благодаря вашей поддержки и помощи, очень благодарен вам =^^=
+    </string>
 
 </resources>

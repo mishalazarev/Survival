@@ -14,30 +14,46 @@ import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import white.ball.survival.R
 import white.ball.survival.databinding.FragmentUserGuideDialogBinding
+import white.ball.survival.domain.model.News.NewsUpDate
 import white.ball.survival.domain.model.user_guide.DescriptionAnimal
 import white.ball.survival.domain.model.user_guide.DescriptionPlant
 import white.ball.survival.present.dialog_screen.user_guide.adapter.adapter.AnimalAdapter
+import white.ball.survival.present.dialog_screen.user_guide.adapter.adapter.NewsUpDateAdapter
 import white.ball.survival.present.dialog_screen.user_guide.adapter.adapter.PlantAdapter
 
 class UserGuideDialogFragment : DialogFragment() {
 
     private lateinit var binding: FragmentUserGuideDialogBinding
+
     private lateinit var animalAdapter: AnimalAdapter
     private lateinit var plantAdapter: PlantAdapter
+    private lateinit var newsUpDateAdapter: NewsUpDateAdapter
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val view = View.inflate(activity, R.layout.fragment_user_guide_dialog, null)
         binding = FragmentUserGuideDialogBinding.bind(view)
         val dialog = AlertDialog.Builder(activity)
-        val linearLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        val linearLayoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
         animalAdapter = AnimalAdapter()
         plantAdapter = PlantAdapter(requireContext())
+        newsUpDateAdapter = NewsUpDateAdapter()
 
-        animalAdapter.animalList = DescriptionAnimal.values().toList()
-        plantAdapter.plantList = DescriptionPlant.values().toList()
+        animalAdapter.animalList = DescriptionAnimal.entries
+        plantAdapter.plantList = DescriptionPlant.entries
 
-        with (binding) {
+        newsUpDateAdapter.newsUpDate = arrayListOf(
+            NewsUpDate(
+                captionResId = R.string.caption_1_1,
+                dateResId = R.string.date_1_1,
+                nameVersionResId = R.string.name_version_1_1,
+                mainTextResId = R.string.main_text_1_1,
+                imageResId = R.drawable.image_version_1_1
+            )
+        )
+
+        with(binding) {
             sectionRecyclerview.layoutManager = linearLayoutManager
 
             sectionAnimalsTextView.setOnClickListener {
@@ -50,6 +66,13 @@ class UserGuideDialogFragment : DialogFragment() {
             sectionPlantsTextView.setOnClickListener {
                 if (!sectionRecyclerview.isVisible) {
                     sectionRecyclerview.adapter = plantAdapter
+                    isShowSection(true)
+                }
+            }
+
+            sectionNewsUpDateTextView.setOnClickListener {
+                if (!sectionRecyclerview.isVisible) {
+                    sectionRecyclerview.adapter = newsUpDateAdapter
                     isShowSection(true)
                 }
             }
@@ -86,11 +109,13 @@ class UserGuideDialogFragment : DialogFragment() {
                 iconBackImageButton.isVisible = true
                 sectionAnimalsTextView.isVisible = false
                 sectionPlantsTextView.isVisible = false
+                sectionNewsUpDateTextView.isVisible = false
             } else {
                 sectionRecyclerview.isVisible = false
                 iconBackImageButton.isVisible = false
                 sectionAnimalsTextView.isVisible = true
                 sectionPlantsTextView.isVisible = true
+                sectionNewsUpDateTextView.isVisible = true
             }
         }
     }

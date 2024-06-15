@@ -4,10 +4,8 @@ import white.ball.survival.domain.model.location.Location
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import white.ball.survival.R
 import white.ball.survival.domain.model.base_model.GameTime
 import white.ball.survival.domain.model.base_model.Player
-import white.ball.survival.domain.model.extension_model.IndicatorThirst
 import white.ball.survival.domain.model.music_controller.MusicController
 import white.ball.survival.domain.service.*
 import white.ball.survival.domain.repository.InteractionWithEnvironmentRepository
@@ -85,18 +83,18 @@ class GamePlayViewModel(
     }
 
     fun startCooking() {
-        interactionWithEnvironmentRepository.startCooking(player.value!!.news)
+        interactionWithEnvironmentRepository.startCooking(player.value!!.newsNotifications)
     }
 
     fun startAntiThief() {
-        interactionWithEnvironmentRepository.startAntiThief(player.value!!.news)
+        interactionWithEnvironmentRepository.startAntiThief(player.value!!.newsNotifications)
     }
 
     fun startExtractingWater() {
-        interactionWithEnvironmentRepository.startExtractingWater(player.value!!.news)
+        interactionWithEnvironmentRepository.startExtractingWater(player.value!!.newsNotifications)
     }
 
     fun startGrowingPlant() {
-        return interactionWithEnvironmentRepository.startGrowingPlant(player.value!!.news)
+        return interactionWithEnvironmentRepository.startGrowingPlant(player.value!!.newsNotifications)
     }
 }

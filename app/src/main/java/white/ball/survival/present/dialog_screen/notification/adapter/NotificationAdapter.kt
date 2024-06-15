@@ -1,32 +1,25 @@
 package white.ball.survival.present.dialog_screen.notification.adapter
 
-import android.content.Context
-import android.graphics.Paint.Align
-import android.text.Layout.Alignment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.GridLayout
-import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import white.ball.survival.databinding.NewsBlockBinding
-import white.ball.survival.domain.model.News.News
-import white.ball.survival.domain.repository.NotificationRepository
+import white.ball.survival.domain.model.News.NewsNotification
 
 class NotificationAdapter : RecyclerView.Adapter<NotificationAdapter.NotificationHolder>()  {
 
-    var newsList: List<News> = emptyList()
+    var mNewsNotificationList: List<NewsNotification> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
     inner class NotificationHolder(val binding: NewsBlockBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(newsBlock: News) {
+        fun bind(newsNotificationBlock: NewsNotification) {
             with(binding) {
-                captionNewTextView.setText(newsBlock.captionNews)
-                mainTextTextView.text = newsBlock.mainText
-                newsImageView.setImageResource(newsBlock.imageId)
+                captionNewTextView.setText(newsNotificationBlock.captionNews)
+                mainTextTextView.text = newsNotificationBlock.mainText
+                newsImageView.setImageResource(newsNotificationBlock.imageId)
             }
         }
     }
@@ -40,10 +33,10 @@ class NotificationAdapter : RecyclerView.Adapter<NotificationAdapter.Notificatio
         return NotificationHolder(binding)
     }
 
-    override fun getItemCount(): Int = newsList.size
+    override fun getItemCount(): Int = mNewsNotificationList.size
 
     override fun onBindViewHolder(holder: NotificationHolder, position: Int) {
-        val newsBlock = newsList[position]
+        val newsBlock = mNewsNotificationList[position]
 
         holder.bind(newsBlock)
     }

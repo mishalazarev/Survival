@@ -292,18 +292,18 @@ class FightViewModel(
     }
 
     fun startCooking() {
-        interactionWithEnvironmentRepository.startCooking(player.value!!.news)
+        interactionWithEnvironmentRepository.startCooking(player.value!!.newsNotifications)
     }
 
     fun startAntiThief() {
-        interactionWithEnvironmentRepository.startAntiThief(player.value!!.news)
+        interactionWithEnvironmentRepository.startAntiThief(player.value!!.newsNotifications)
     }
 
     fun startExtractingWater() {
-        interactionWithEnvironmentRepository.startExtractingWater(player.value!!.news)
+        interactionWithEnvironmentRepository.startExtractingWater(player.value!!.newsNotifications)
     }
 
     fun startGrowingPlant() {
-        return interactionWithEnvironmentRepository.startGrowingPlant(player.value!!.news)
+        return interactionWithEnvironmentRepository.startGrowingPlant(player.value!!.newsNotifications)
     }
 }

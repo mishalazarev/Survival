@@ -1,6 +1,6 @@
 package white.ball.survival.domain.repository
 
-import white.ball.survival.domain.model.News.News
+import white.ball.survival.domain.model.News.NewsNotification
 import white.ball.survival.domain.model.animal.Animal
 import white.ball.survival.domain.model.base_model.LiveObject
 import white.ball.survival.domain.model.base_model.Player
@@ -72,7 +72,7 @@ interface PlayerRepository : LiveObject {
     fun addPlayerListener(playerListener: PlayerListener)
 
     // other moves
-    fun showNewsList(): List<News>
+    fun showNewsList(): List<NewsNotification>
 
     fun clearNewsList()
 

@@ -1,7 +1,7 @@
 package white.ball.survival.domain.service
 
 import android.content.SharedPreferences
-import white.ball.survival.domain.model.News.News
+import white.ball.survival.domain.model.News.NewsNotification
 import white.ball.survival.domain.model.armor.Armor
 import white.ball.survival.domain.model.base_model.GameTime
 import white.ball.survival.domain.model.base_model.Item
@@ -62,7 +62,7 @@ class Progress {
             putInt(DAMAGE_VALUE_KEY, newProgressPlayer.damage)
             putInt(SATIETY_VALUE_KEY, newProgressPlayer.satiety.indicator.percent)
             putInt(THIRST_VALUE_KEY, newProgressPlayer.thirst.indicator.percent)
-            setNewsList(newProgressPlayer.news)
+            setNewsList(newProgressPlayer.newsNotifications)
             setBackpackList(newProgressPlayer.backpack)
             setPlacePutOnList(newProgressPlayer.placeForPutOn)
             setEffectHaveDeny(newProgressPlayer.effectHaveDeny)
@@ -105,7 +105,7 @@ class Progress {
             progressPlayer.damage = getInt(DAMAGE_VALUE_KEY, 0)
             progressPlayer.satiety.indicator.percent = getInt(SATIETY_VALUE_KEY, 0)
             progressPlayer.thirst.indicator.percent = getInt(THIRST_VALUE_KEY, 0)
-            progressPlayer.news = getNewsList(getInt(NEWS_SIZE_KEY, 0))
+            progressPlayer.newsNotifications = getNewsList(getInt(NEWS_SIZE_KEY, 0))
             progressPlayer.backpack = getBackpackList(getInt(BACKPACK_SIZE_KEY, 0))
             progressPlayer.placeForPutOn = getPlacePutOnList()
             progressPlayer.effectHaveDeny = getEffectHaveDeny(getInt(EFFECT_HAVE_DENY_SIZE_KEY, 0))
@@ -372,42 +372,42 @@ class Progress {
         return progressGameTime
     }
 
-    private fun getNewsList(sizeNewsList: Int): MutableList<News> {
-        val resultNewsList = mutableListOf<News>()
+    private fun getNewsList(sizeNewsList: Int): MutableList<NewsNotification> {
+        val resultNewsListNotification = mutableListOf<NewsNotification>()
         var index = 0
 
-        if (sizeNewsList == 0) return resultNewsList
+        if (sizeNewsList == 0) return resultNewsListNotification
 
         while (sizeNewsList != index) {
             val captionNewsKey = CAPTION_NEWS_KEY + "$index"
             val mainTextKey = MAIN_TEXT_NEWS_KEY + "$index"
             val imageId = IMAGE_NEWS_ID_KEY + "$index"
 
-            val news = News()
+            val newsNotification = NewsNotification()
 
             with(currentGamePlayProgress) {
-                news.captionNews = getInt(captionNewsKey, 0)
-                news.mainText = getString(mainTextKey, "").toString()
-                news.imageId = getInt(imageId, 0)
+                newsNotification.captionNews = getInt(captionNewsKey, 0)
+                newsNotification.mainText = getString(mainTextKey, "").toString()
+                newsNotification.imageId = getInt(imageId, 0)
             }
-            resultNewsList.add(news)
+            resultNewsListNotification.add(newsNotification)
             index++
         }
 
-        return resultNewsList
+        return resultNewsListNotification
     }
 
-    private fun setNewsList(newNewsList: List<News>) {
+    private fun setNewsList(newNewsListNotification: List<NewsNotification>) {
         with(currentGamePlayProgress.edit()) {
-            putInt(NEWS_SIZE_KEY, newNewsList.size)
-            for (index in newNewsList.indices) {
+            putInt(NEWS_SIZE_KEY, newNewsListNotification.size)
+            for (index in newNewsListNotification.indices) {
                 val captionNewsKey = CAPTION_NEWS_KEY + "$index"
                 val mainTextNewsKey = MAIN_TEXT_NEWS_KEY + "$index"
                 val imageNewsIdKey = IMAGE_NEWS_ID_KEY + "$index"
 
-                putInt(captionNewsKey, newNewsList[index].captionNews)
-                putString(mainTextNewsKey, newNewsList[index].mainText)
-                putInt(imageNewsIdKey, newNewsList[index].imageId)
+                putInt(captionNewsKey, newNewsListNotification[index].captionNews)
+                putString(mainTextNewsKey, newNewsListNotification[index].mainText)
+                putInt(imageNewsIdKey, newNewsListNotification[index].imageId)
             }
             commit()
         }

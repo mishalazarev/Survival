@@ -2,7 +2,7 @@ package white.ball.survival.domain.service
 
 import white.ball.survival.R
 import white.ball.survival.domain.convertor.UIRepository
-import white.ball.survival.domain.model.News.News
+import white.ball.survival.domain.model.News.NewsNotification
 import white.ball.survival.domain.model.animal.Animal
 import white.ball.survival.domain.model.armor.Armor
 import white.ball.survival.domain.model.base_model.Item
@@ -38,7 +38,7 @@ class PlayerAction(
     private var indicatorThirst: Indicator
 
     private val levelUp = Level()
-    private val news = News()
+    private val mNewsNotification = NewsNotification()
 
     init {
         currentPlayer = player
@@ -322,7 +322,7 @@ class PlayerAction(
                 satiety.indicator.percent = 100
                 thirst.indicator.percent = 100
             }
-            currentPlayer.news.add(0, news.getLevelUpNews(currentPlayer.level))
+            currentPlayer.newsNotifications.add(0, mNewsNotification.getLevelUpNews(currentPlayer.level))
             notifyPlayerChanges()
         }
     }
@@ -388,7 +388,7 @@ class PlayerAction(
 
             placeForPutOn = mutableListOf(null, null, null, null)
             effectHaveDeny.clear()
-            news.clear()
+            newsNotifications.clear()
 
             exp = 0
         }
@@ -407,7 +407,7 @@ class PlayerAction(
         } else {
             currentPlayer.backpack.removeAt(indexInRandomItemInBackpack)
         }
-        currentPlayer.news.add(0, news.getItemStoleNews(uiRepository.getString(randomItem.item.nameItem)))
+        currentPlayer.newsNotifications.add(0, mNewsNotification.getItemStoleNews(uiRepository.getString(randomItem.item.nameItem)))
         notifyPlayerChanges()
     }
 
@@ -769,10 +769,10 @@ class PlayerAction(
         playerListener.invoke(currentPlayer)
     }
 
-    override fun showNewsList(): List<News> = currentPlayer.news
+    override fun showNewsList(): List<NewsNotification> = currentPlayer.newsNotifications
 
     override fun clearNewsList() {
-        currentPlayer.news.clear()
+        currentPlayer.newsNotifications.clear()
     }
 
     private fun notifyPlayerChanges() {

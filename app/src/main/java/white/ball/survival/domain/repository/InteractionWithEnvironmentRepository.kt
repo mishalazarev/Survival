@@ -1,6 +1,6 @@
 package white.ball.survival.domain.repository
 
-import white.ball.survival.domain.model.News.News
+import white.ball.survival.domain.model.News.NewsNotification
 import white.ball.survival.domain.model.animal.Animal
 import white.ball.survival.domain.model.base_model.Player
 import white.ball.survival.domain.model.extension_model.ItemsSlot
@@ -35,25 +35,25 @@ interface InteractionWithEnvironmentRepository {
 
     fun equalizeCountOfItems(currentItemsSlot: ItemsSlot, newItemsForPlus: ItemsSlot, backpackByPlayer: MutableList<ItemsSlot>)
 
-    fun setForCook(index: Int, itemsForCook: ItemsSlot?, backpackByPlayer: MutableList<ItemsSlot>, newsList: MutableList<News>): Int
+    fun setForCook(index: Int, itemsForCook: ItemsSlot?, backpackByPlayer: MutableList<ItemsSlot>, newsNotificationList: MutableList<NewsNotification>): Int
 
-    fun setAntiThief(index: Int, itemPhosphorus: ItemsSlot?, backpackByPlayer: MutableList<ItemsSlot>, newsList: MutableList<News>): Int
+    fun setAntiThief(index: Int, itemPhosphorus: ItemsSlot?, backpackByPlayer: MutableList<ItemsSlot>, newsNotificationList: MutableList<NewsNotification>): Int
 
-    fun setExtractWater(index: Int, backpackByPlayer: MutableList<ItemsSlot>, newsList: MutableList<News>): Int
+    fun setExtractWater(index: Int, backpackByPlayer: MutableList<ItemsSlot>, newsNotificationList: MutableList<NewsNotification>): Int
 
-    fun setPlantFruit(index: Int, backpackByPlayer: MutableList<ItemsSlot>, newsList: MutableList<News>): Int
+    fun setPlantFruit(index: Int, backpackByPlayer: MutableList<ItemsSlot>, newsNotificationList: MutableList<NewsNotification>): Int
 
-    fun growPlant(seedItem: ItemsSlot, backpackByPlayer: MutableList<ItemsSlot>, newsList: MutableList<News>)
+    fun growPlant(seedItem: ItemsSlot, backpackByPlayer: MutableList<ItemsSlot>, newsNotificationList: MutableList<NewsNotification>)
 
-    fun giveWaterForPlant(itemWater: ItemsSlot, backpackByPlayer: MutableList<ItemsSlot>, newsList: MutableList<News>)
+    fun giveWaterForPlant(itemWater: ItemsSlot, backpackByPlayer: MutableList<ItemsSlot>, newsNotificationList: MutableList<NewsNotification>)
 
-    fun destroyPlant(backpackByPlayer: MutableList<ItemsSlot>, newsList: MutableList<News>)
+    fun destroyPlant(backpackByPlayer: MutableList<ItemsSlot>, newsNotificationList: MutableList<NewsNotification>)
 
-    fun startCooking(newsList: MutableList<News>)
+    fun startCooking(newsNotificationList: MutableList<NewsNotification>)
 
-    fun startAntiThief(newsList: MutableList<News>)
+    fun startAntiThief(newsNotificationList: MutableList<NewsNotification>)
 
-    fun startExtractingWater(newsList: MutableList<News>)
+    fun startExtractingWater(newsNotificationList: MutableList<NewsNotification>)
 
-    fun startGrowingPlant(newsList: MutableList<News>)
+    fun startGrowingPlant(newsNotificationList: MutableList<NewsNotification>)
 }
