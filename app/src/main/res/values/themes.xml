@@ -1,0 +1,92 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.SurviveInTheForest" parent="Theme.MaterialComponents.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/dark_blue</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">@color/status_bar</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <!-- MainActivity and his links -->
+    <style name="main_activity_text_view_link">
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:backgroundTint">@color/dark_blue</item>
+    </style>
+
+    <style name="Theme.SurviveInTheForest.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- GamePlayFragment -->
+    <style name="position_menu_image_button">
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+    </style>
+
+    <!-- button get resource -->
+    <style name="get_resource_button">
+        <item name="android:backgroundTint">@color/light_gray</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="section_link_section">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">italic|bold</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:background">@drawable/animate_cell_item</item>
+        <item name="android:clickable">true</item>
+        <item name="android:padding">5dp</item>
+    </style>
+
+    <style name="setting_dialog_fragment">
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="exit_text_view">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">right</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginEnd">20dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:text">@string/close</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="back_image_button">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">left</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+    </style>
+
+
+    <style name="setting_fragment">
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="backgroundTint">@color/dark_blue</item>
+    </style>
+</resources>

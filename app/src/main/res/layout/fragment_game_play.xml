@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".present.screen.main_screen.game_play.GamePlayFragment"
+    android:id="@+id/background_game_play_constraint_layout"
+    android:background="@drawable/location_forest">
+
+
+    <ImageButton
+        android:id="@+id/clue_image_button"
+        style="@style/position_menu_image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/animate_icon_clue"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/day_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clue_image_button" />
+
+    <TextView
+        android:id="@+id/time_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/day_text_view" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/wrapper_main_indicators_constraint_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/background_indicator_player"
+        android:padding="10dp"
+        android:layout_margin="5dp">
+
+        <LinearLayout
+            android:id="@+id/wrapper_indicators_linear_layout"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <white.ball.survival.present.dialog_screen.backpack.progress_bar.ProgressBar
+                android:id="@+id/health_indicator_progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/indicator_health_default"
+                android:gravity="center" />
+
+            <white.ball.survival.present.dialog_screen.backpack.progress_bar.ProgressBar
+                android:layout_marginTop="2dp"
+                android:id="@+id/endurance_indicator_progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/indicator_endurance_default"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/indicator_food_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/indicator_food_text_view"
+            android:textColor="@color/green"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wrapper_indicators_linear_layout" />
+
+    <ImageView
+        android:id="@+id/food_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/icon_food"
+        app:layout_constraintStart_toEndOf="@+id/indicator_food_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/wrapper_indicators_linear_layout" />
+
+    <TextView
+        android:id="@+id/indicator_water_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/indicator_water_text_view"
+        android:textColor="@color/green"
+        app:layout_constraintStart_toEndOf="@+id/food_image_view"
+        app:layout_constraintTop_toBottomOf="@+id/wrapper_indicators_linear_layout" />
+
+    <ImageView
+        android:id="@+id/water_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/icon_water"
+        app:layout_constraintStart_toEndOf="@+id/indicator_water_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/wrapper_indicators_linear_layout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/have_effect_player_linear_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        app:layout_constraintStart_toEndOf="@+id/wrapper_main_indicators_constraint_layout"
+        app:layout_constraintTop_toTopOf="@+id/background_shadow_image_view" />
+
+    <ImageButton
+        android:id="@+id/notification_image_button"
+        style="@style/position_menu_image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginEnd="0dp"
+        android:background="@drawable/animate_icon_notification"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:layout_marginStart="10dp"
+        android:id="@+id/create_image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/animate_icon_create"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/sleep_image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/animate_icon_sleep"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:layout_marginBottom="2dp"
+        android:id="@+id/looking_for_an_enemy_image_button"
+        style="@style/position_menu_image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/animate_icon_looking_for_enemy"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/wrapper_main_icon_linear_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/build_image_button"
+            style="@style/position_menu_image_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/animate_icon_build" />
+
+        <ImageButton
+            android:id="@+id/map_image_button"
+            style="@style/position_menu_image_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/animate_icon_map" />
+
+        <ImageButton
+            android:id="@+id/backpack_image_button"
+            style="@style/position_menu_image_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/animate_icon_backpack" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/hint_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/block_hint"
+        android:fontFamily="sans-serif"
+        android:textStyle="italic"
+        android:gravity="center"
+        android:lines="3"
+        android:text="@string/plant_became_to_live"
+        android:visibility="invisible"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ImageView
+        android:id="@+id/background_shadow_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.1"
+        android:background="@drawable/location_sleep"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

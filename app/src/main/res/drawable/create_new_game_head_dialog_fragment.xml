@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/head_create_new_game_dialog_fragment" />
+    <stroke android:width="3dp" android:color="@color/border_create_new_game"/>
+    <corners android:topLeftRadius="25dp" android:topRightRadius="25dp"/>
+</shape>

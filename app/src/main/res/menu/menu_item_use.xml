@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/build_item"
+        android:title="@string/build_house" />
+
+    <item
+        android:id="@+id/grow_plant"
+        android:title="@string/grow_plant"/>
+
+    <item
+        android:id="@+id/use_item"
+        android:title="@string/use"/>
+
+    <item
+        android:id="@+id/put_anti_thief"
+        android:title="@string/put_anti_thief"/>
+
+    <item
+        android:id="@+id/shell_item_open"
+        android:title="@string/shell_item_open"/>
+
+    <item
+        android:id="@+id/scroll_item_open"
+        android:title="@string/scroll_item_open"/>
+
+    <item
+        android:id="@+id/throw_into_cook"
+        android:title="@string/throw_into_cook" />
+
+    <item
+        android:id="@+id/item_put"
+        android:title="@string/put_item" />
+
+    <item
+        android:id="@+id/join_similar_items"
+        android:title="@string/join_similar_items"/>
+
+    <item
+        android:id="@+id/divide_into_quality_groups"
+        android:title="@string/divide_into_quality_groups"/>
+
+    <item
+        android:id="@+id/about_item"
+        android:title="@string/find_out_information" />
+
+    <item
+        android:id="@+id/threw_it_away_item"
+        android:title="@string/threw_it_away" />
+
+    <item
+        android:id="@+id/threw_it_away_all_item"
+        android:title="@string/threw_it_away_all_item" />
+
+</menu>

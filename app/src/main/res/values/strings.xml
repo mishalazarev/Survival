@@ -1,0 +1,341 @@
+<resources>
+    <string name="app_name">Survival</string>
+
+    <!-- MainActivity -->
+    <string name="game_play_text_view_link">Начать играть</string>
+    <string name="download_game_text_view_link">Загрузить игру</string>
+    <string name="exit_text_view_link">Выход</string>
+
+    <!-- DownloadFragment -->
+    <string name="empty_progress">Еще не было сохранения</string>
+
+    <!-- GamePlayFragment -->
+    <string name="indicator_food_text_view">100%</string>
+    <string name="indicator_water_text_view">100%</string>
+    <string name="looking_for_an_enemy_image_button">Поиск противника</string>
+    <string name="warning_about_sleep">Через 30 секунд наступит ночь</string>
+    <string name="warning_about_you_can_sleep">Наступило время для сна</string>
+    <string name="destroy_build">Разрушить постройку</string>
+
+    <!-- SettingFragment -->
+    <string name="clue_text_view">Подсказки</string>
+
+    <!-- FightFragment -->
+    <string name="timer_text_view">15</string>
+
+    <!-- DIALOG FRAGMENTS -->
+
+    <!-- Process -->
+    <string name="caption_download">Загрузка</string>
+    <string name="caption_save">Сохранение</string>
+
+    <!-- CreateNewGame -->
+    <string name="caption_name_player_text_view">Введите имя игрока</string>
+    <string name="caption_create_new_game">Создать новую игру</string>
+    <string name="caption_create_game">Создать игру</string>
+    <string name="the_name_player_is_empty">Пожалуйста введите имя игрока</string>
+    <string name="satiety_thirsty">Жажда, голод</string>
+    <string name="hints">Подсказки</string>
+
+    <!-- VictoryDialogFragment -->
+    <string name="caption_victory">Победа</string>
+    <string name="exit_to_main_screen_button">В безопасное место</string>
+    <string name="next_animal">Следующий противник</string>
+
+    <!-- DeathDialogFragment -->
+    <string name="caption_death">Смерть</string>
+    <string name="caption_surrender">Поражение</string>
+    <string name="backpack_not_empty_text_surrender">Соперник вас пощадил, но взамен на вашу жизнь забрал:</string>
+    <string name="backpack_empty_text_surrender">Соперник вас пощадил и отпустил. </string>
+    <string name="text_defeat">Вы умерли и потеряли все свои ресурсы, которые были в рюкзаке...</string>
+
+    <!-- MapDialogFragment -->
+    <string name="travel_button">Отправиться</string>
+    <string name="cancel_button">Отмена</string>
+
+    <!-- HouseDialogFragment -->
+    <string name="caption_house">Жилище</string>
+    <string name="caption_your_home">Ваше жилище</string>
+    <string name="oven">Печь</string>
+    <string name="extraction_water">Добыча воды</string>
+
+    <!-- SettingDialogFragment -->
+    <string name="sound_text_view">Звук</string>
+    <string name="music_text_view">Музыка</string>
+    <string name="save_button">Сохраниться</string>
+    <string name="exit_button">Выйти в главное меню</string>
+    <string name="turn_on_button">Вкл.</string>
+    <string name="turn_off_button">Выкл.</string>
+
+    <!-- CreateDialogFragment -->
+    <string name="caption_create">Мастерская</string>
+    <string name="caption_looking_for_enemy">Найти противника</string>
+    <string name="create_item">Создать</string>
+    <string name="caption_recipe_item">Рецепт:</string>
+    <string name="caption_impact_protection">Защита от удара</string>
+    <string name="resisting">Защита от эффекта</string>
+    <string name="weapon">Оружие</string>
+    <string name="building">Постройки</string>
+    <string name="armor">Броня</string>
+    <string name="notification_the_item_create">Предмет создан</string>
+    <string name="notification_resources_is_not_enough">Не хватает ресурсов"</string>
+
+    <string name="weapon_effect">Эффект оружия</string>
+
+    <!-- SleepDialogFragment -->
+    <string name="caption_are_sure_sleep">Вы уверены что планируете спать?</string>
+    <string name="sleep">Спать</string>
+
+    <!-- EndGameDialogFragment -->
+    <string name="caption_lose_end_game">Увы.. противник оказался сильней</string>
+    <string name="caption_win_end_game">Поздравляю!!!</string>
+
+    <string name="caption_thanksgiving">Спасибо большое что дошли до конца игры, для меня это очень много значит, надеюсь вам понравилось.^^\n
+        Игра еще находится в тестировании, поэтому могут появляться ошибки, буду исправлять по мере их возникновения =) \n
+    Если игра будет иметь хороший отлик, то в скором времени у нее будут перемены!!!\n
+    У меня осталось еще идеи, которые я не стал реализовывать и пытался закончить в кратчайшие сроки.\n
+    Дальше будет интересней!!</string>
+
+    <string name="caption_icon_authors">Иконки были взяты:</string>
+    <string name="icon_author1">www.flaticon.com/authors/kemalmoe</string>
+    <string name="icon_author2">www.flaticon.com/authors/srip</string>
+    <string name="icon_author3">www.flaticon.com/authors/freepik</string>
+
+    <string name="caption_sound_authors">Звуковое сопровождение было взято:</string>
+    <string name="sound_author1">zvukogram.com</string>
+    <string name="sound_author2">zvukipro.com</string>
+
+    <string name="caption_end_game_button">Закончить игру</string>
+
+    <!-- UserGuideDialogFragment -->
+    <string name="caption_user_guide">Руководство пользователя</string>
+    <string name="caption_location">Локация</string>
+    <string name="caption_effect">Эффект</string>
+    <string name="section_animals">Животные</string>
+    <string name="section_plants">Растения</string>
+    <string name="caption_nutrition">Сытость</string>
+    <string name="caption_moisture">Жажда</string>
+    <string name="section_scroll">Свитки</string>
+    <string name="unknown">Неизвестно</string>
+
+    <!-- the animal is his description location -->
+    <string name="locations_aqua">Во всех локациях кроме Пустыни</string>
+    <string name="anywhere_locations">Во всех локациях</string>
+    <string name="locations_fruit">Во всех локациях, кроме Пустыни и Ледника</string>
+    <string name="locations_berry">Во всех локациях кроме Леса и Скалы</string>
+    <string name="locations_fruit_item">Во всех локациях кроме Ледника</string>
+    <string name="locations_moss">В локациях Болото и Ледник</string>
+
+    <!-- BuildDialogFragment -->
+    <string name="size_slots_for_safe">Количесто слотов для хранения вещей</string>
+    <string name="is_cooking">Место для приготовления</string>
+    <string name="size_field_for_plants">Место для посадки растения</string>
+    <string name="is_getting_water">Добыча воды</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+
+    <!-- name of Builds and more -->
+    <string name="anti_thief">Отпугиватель воров</string>
+    <string name="cook_food">Приготовление пищи</string>
+    <string name="extract_water">Добыча воды</string>
+    <string name="garden">Огород</string>
+    <string name="well_build_recipe_item">Колодец</string>
+    <string name="bonfire_recipe_item">Костер</string>
+    <string name="hut_recipe_item">Палатка</string>
+    <string name="wooden_house_recipe_item">Деревянное жилище</string>
+    <string name="stone_house_recipe_item">Каменное жилище</string>
+
+    <!-- NotificationFragmentDialog -->
+    <string name="caption_notification">Уведомления</string>
+    <string name="caption_empty_notification">Нет новых новостей</string>
+    <string name="caption_new_level">Новый уровень!!!</string>
+    <string name="caption_food_cook">Пища приготовлена!!!</string>
+    <string name="caption_item_stole">Кража!!!</string>
+    <string name="caption_phosphorus_dim">Фосфор потускнел!!!</string>
+    <string name="plant_wants_to_drink">Растение хочет пить</string>
+    <string name="plant_give_fruits">Растение дало плоды</string>
+    <string name="plant_become_adult">Растение стало взрослым</string>
+    <string name="plant_became_to_live">Растение ожило!</string>
+    <string name="water_extract">Вода добыта!!!</string>
+    <string name="well_is_full">Колодец переполнен!!!</string>
+    <string name="got_resource">Получены ресурсы!!!</string>
+
+    <!-- BackpackDialogFragment -->
+    <string name="caption_empty_backpack">Рюкзак пуст</string>
+    <string name="characteristics">Характеристики</string>
+    <string name="damage">Урон</string>
+    <string name="count">1</string>
+    <string name="level">Уровень</string>
+    <string name="experience">Опыт</string>
+    <string name="study_points">Очки обучения</string>
+    <string name="the_build_already_done">Вы не можете построить это, так как в этой локации уже имеется здание..</string>
+    <string name="the_plant_alreay_done">У вас уже растет здесь растение..</string>
+    <string name="backpack_has_not_item_water">В рюкзаке нет воды</string>
+    <string name="not_need_give_water_plant">Растение нужно срубить чтобы получить ресурсы..</string>
+
+    <!-- name id menu for game play -->
+    <string name="caption_sleep">Отдых</string>
+    <string name="caption_backpack">Рюкзак</string>
+    <string name="caption_bonfire">Костёр</string>
+    <string name="caption_character">Характеристики персонажа</string>
+    <string name="caption_map">Карта</string>
+    <string name="caption_setting">Настройки</string>
+    <string name="close">X</string>
+
+    <string name="get_resource_image_button">Get resource</string>
+
+    <!-- name of item -->
+    <string name="seed_aloe">Семя алоэ</string>
+    <string name="seed_wheat">Семя пшеницы</string>
+    <string name="seed_fruit_animal">Семя фруктового монстра</string>
+    <string name="seed_bone">Семя мясного дерева</string>
+    <string name="see_oak">Семя дуба</string>
+    <string name="bread">Хлеб</string>
+    <string name="seed_in_shell">Семя в скорлупе</string>
+    <string name="wheat">Пшеница</string>
+    <string name="count_item">1 шт.</string>
+    <string name="item_large_flask_with_water">Большая колба с водой</string>
+    <string name="item_flask_with_water">Колба с водой</string>
+    <string name="fish_raw_item">Сырая рыба</string>
+    <string name="fish_fried_item">Жаренная рыба</string>
+    <string name="wood_item">Бревно</string>
+    <string name="phosphorus_bright">Фосфор яркий</string>
+    <string name="phosphorus_dim">Фосфор тусклый</string>
+    <string name="aloe_item">Алоэ</string>
+    <string name="arrow_recipe_item">Стрела</string>
+    <string name="berry_item">Ягода</string>
+    <string name="blueberry_item">Синяя ягода</string>
+    <string name="cactus_item">Кактус</string>
+    <string name="fruit_item">Фрут</string>
+    <string name="honey_item">Мед</string>
+    <string name="leaves_item">Листья</string>
+    <string name="meat_fried_item">Жаренное мясо</string>
+    <string name="meat_raw_item">Сырое мясо</string>
+    <string name="moss_item">Мох</string>
+    <string name="mushroom_raw_item">Гриб</string>
+    <string name="mushroom_fried_item">Жаренный гриб</string>
+    <string name="nurg_born_item">Рог нюрга</string>
+    <string name="nurg_plate_item">Пластина нюрга</string>
+    <string name="phosphorus_item">Фосфор</string>
+    <string name="poisoned_point_item">Отравленое острие</string>
+    <string name="puchik_plate_item">Пластина пучика</string>
+    <string name="scroll_item">Свиток</string>
+    <string name="spork_plate_item">Пластина спорка</string>
+    <string name="stone_item">Камень</string>
+    <string name="web_item">Паутина</string>
+    <string name="scroll_fire_ball">Свиток "Огненный шар"</string>
+    <string name="scroll_poison">Свиток "Отравление"</string>
+    <string name="scroll_weak">Свиток "Слабость"</string>
+    <string name="scroll_regeneration">Свиток регенерации</string>
+
+    <!-- name of weapon -->
+    <string name="wooden_sword_recipe_item">Деревянный меч</string>
+    <string name="poisoned_arrow_recipe_item">Отравленная стрела</string>
+    <string name="katana_recipe_item">Катана</string>
+    <string name="mace_recipe_item">Булава</string>
+    <string name="stone_sword_recipe_item">Каменный меч</string>
+    <string name="bow_recipe_item">Лук</string>
+
+    <!-- the name of armor -->
+    <string name="puchick_armor_recipe_item">Пучиковая броня</string>
+    <string name="nurg_armor_recipe_item">Нюрговая броня</string>
+    <string name="spork_armor_recipe_item">Спорковая броня</string>
+
+    <!-- name of animal -->
+    <string name="rabbit">Кролик</string>
+    <string name="fruit_animal">Фруктовый монстр</string>
+    <string name="screamer">Кролик крикун</string>
+    <string name="nerd">Нерд</string>
+    <string name="migle">Мигл</string>
+    <string name="mospeh">Моспех</string>
+    <string name="gazl">Газл</string>
+    <string name="nurg">Нург</string>
+    <string name="slime">Слизь</string>
+    <string name="zhabarib">Жаба-гриб</string>
+    <string name="puchik">Пучик</string>
+    <string name="pchyosa">Пчёса</string>
+    <string name="chukech">Чупик</string>
+    <string name="wolfhound">Волкодав</string>
+    <string name="penguin">Пингвин</string>
+    <string name="veton">Ветон</string>
+    <string name="bite">Укуск</string>
+    <string name="spork">Спорк</string>
+    <string name="skeleton">Скелет</string>
+    <string name="puk_luk">Пук-лук</string>
+    <string name="besfat">Бесфат</string>
+    <string name="aqua">Аква</string>
+    <string name="boa">Боа</string>
+    <string name="enslaver">Поработитель</string>
+
+    <!-- name of location -->
+    <string name="travel">Путешествие</string>
+    <string name="forest">Лес</string>
+    <string name="rock">Скала</string>
+    <string name="swamp">Болото</string>
+    <string name="glacier">Ледник</string>
+    <string name="cemetery">Кладбище</string>
+    <string name="desert">Пустыня</string>
+
+    <!-- name of effect -->
+    <string name="weakness">Слабость</string>
+    <string name="poisoning">Отравление</string>
+    <string name="stun">Оглушение</string>
+    <string name="fire_ball">Огненный шар</string>
+    <string name="healing">Исцеление</string>
+    <string name="regeneration">Регенерация</string>
+    <string name="stop_weakness">Остановка слабости</string>
+    <string name="stop_poisoning">Остановка отравления</string>
+    <string name="no_effect">Без эффекта</string>
+
+    <!-- get name item of bottom -->
+    <string name="get_fish_raw">Рыба</string>
+
+    <!-- test text -->
+    <string name="time_save">11.03.1998 06:57</string>
+    <string name="name_save">Name is empty</string>
+    <string name="percent_game_play">1%</string>
+    <string name="count_endurance_for_travel">-25</string>
+
+    <!-- name feature player-->
+    <string name="caption_name_player">Имя</string>
+    <string name="health">Здоровье</string>
+    <string name="endurance">Выносливость</string>
+    <string name="satiety">Сытость</string>
+    <string name="thirst">Жажда</string>
+    <string name="food_indicator">Пища</string>
+    <string name="water_indicator">Вода</string>
+
+    <!-- name Plant -->
+    <string name="oak">Дуб</string>
+    <string name="meat_tree">Мясное дерево</string>
+
+    <!-- Toast hints -->
+    <string name="toast_skip_step">Ход пропущен</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="answer_animal_surrender_defeat">Соперник не дает вам шанс сбежать</string>
+    <string name="empty_backpack_surrender">Противник вас не отпустит.</string>
+    <string name="count_endurance_not_enough">Не хватает выносливости</string>
+    <string name="already_fiend_in_this_place">Вы уже находитесь в этой локации</string>
+
+    <!-- menu item use -->
+    <string name="grow_plant">Посадить</string>
+    <string name="give_water_for_drink">Полить растение</string>
+    <string name="shell_item_open">Вскрыть скорлупу</string>
+    <string name="scroll_item_open">Открыть свиток</string>
+    <string name="use">Применить</string>
+    <string name="join_similar_items">Объединить предметы</string>
+    <string name="divide_into_quality_groups">Разделить предметы</string>
+    <string name="throw_into_cook">Закинуть для готовки</string>
+    <string name="put_anti_thief">Повесить камень</string>
+    <string name="build_house">Построить</string>
+    <string name="put_item">Надеть</string>
+    <string name="find_out_information">О предмете</string>
+    <string name="threw_it_away">Выбросить</string>
+    <string name="threw_it_away_all_item">Выбросить все</string>
+    
+    <!-- menu garden use -->
+    <string name="give_water_plant">Полить</string>
+    <string name="cut_down_plant">Срубить</string>
+    <string name="about_plant">О растении</string>
+
+</resources>

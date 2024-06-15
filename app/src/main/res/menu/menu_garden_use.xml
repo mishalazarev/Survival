@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="@string/give_water_plant"
+        android:id="@+id/give_water_plant"/>
+    <item
+        android:title="@string/cut_down_plant"
+        android:id="@+id/cut_down_plant"/>
+
+    <item
+        android:title="@string/about_plant"
+        android:id="@+id/about_plant"/>
+</menu>

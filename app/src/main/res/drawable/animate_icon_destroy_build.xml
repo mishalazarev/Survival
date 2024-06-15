@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/icon_destroy_build_disabled" android:state_enabled="false"/>
+    <item android:drawable="@drawable/icon_destroy_build_clicked" android:state_pressed="true"/>
+    <item android:drawable="@drawable/icon_destroy_build_default"/>
+</selector>

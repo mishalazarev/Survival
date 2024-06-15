@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/wrapper_describe_constraint_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/cell_recipe_item"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/caption_name_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:gravity="center"
+        android:text="@string/aqua"
+        android:lines="2"
+        android:maxWidth="100dp"
+        android:textColor="@color/dark_blue"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/image_text_view"
+        android:layout_width="50dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/animal_aqua"
+        android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/caption_name_text_view" />
+
+    <TextView
+        android:id="@+id/caption_location_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:lines="2"
+        android:text="@string/caption_location"
+        android:textColor="@color/dark_blue"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/name_location_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/bilbo_swash_caps"
+        android:gravity="center"
+        android:lines="3"
+        android:maxWidth="100dp"
+        android:text="@string/locations_aqua"
+        android:textColor="@color/black"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/effect_text_view"
+        app:layout_constraintEnd_toEndOf="@+id/caption_location_text_view"
+        app:layout_constraintStart_toStartOf="@+id/caption_location_text_view"
+        app:layout_constraintTop_toTopOf="@+id/effect_text_view" />
+
+    <TextView
+        android:layout_marginEnd="25dp"
+        android:id="@+id/caption_effect_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:lines="2"
+        android:text="@string/caption_effect"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/effect_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/no_effect"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/caption_effect_text_view"
+        app:layout_constraintStart_toStartOf="@+id/caption_effect_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/caption_effect_text_view" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
