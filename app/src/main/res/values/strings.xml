@@ -142,10 +142,15 @@
     <string name="extract_water">Добыча воды</string>
     <string name="garden">Огород</string>
     <string name="well_build_recipe_item">Колодец</string>
+    <string name="well_build_recipe_item_descr">теперь вода обеспечена.</string>
     <string name="bonfire_recipe_item">Костер</string>
+    <string name="bonfire_recipe_item_descr">теперь есть место для приготовления пищи.</string>
     <string name="hut_recipe_item">Палатка</string>
+    <string name="hut_recipe_item_descr">теперь есть место где жить. В будущем будет разница между тремя зданиями.</string>
     <string name="wooden_house_recipe_item">Деревянное жилище</string>
+    <string name="wooden_house_recipe_item_descr">отличное место для жилища. В будущем будет разница между тремя зданиями.</string>
     <string name="stone_house_recipe_item">Каменное жилище</string>
+    <string name="stone_house_recipe_item_descr">шикарный коттедж. В будущем будет разница между тремя зданиями.</string>
 
     <!-- NotificationFragmentDialog -->
     <string name="caption_notification">Уведомления</string>
@@ -187,61 +192,99 @@
     <string name="get_resource_image_button">Get resource</string>
 
     <!-- name of item -->
+    <string name="seed_descr">используется для выращивания растения в огороде.</string>
     <string name="seed_aloe">Семя алоэ</string>
     <string name="seed_wheat">Семя пшеницы</string>
     <string name="seed_fruit_animal">Семя фруктового монстра</string>
     <string name="seed_bone">Семя мясного дерева</string>
     <string name="see_oak">Семя дуба</string>
     <string name="bread">Хлеб</string>
+    <string name="bread_descr">очень питательный и вкусный.\nВосстановит 70 здоровья.</string>
     <string name="seed_in_shell">Семя в скорлупе</string>
+    <string name="seed_in_shell_descr">внутри находится семя.</string>
     <string name="wheat">Пшеница</string>
+    <string name="wheat_descr">предназначен для приготовления хлеба.</string>
     <string name="count_item">1 шт.</string>
     <string name="item_large_flask_with_water">Большая колба с водой</string>
+    <string name="item_large_flask_with_water_descr">восстанавливает 100 выносливости.</string>
     <string name="item_flask_with_water">Колба с водой</string>
+    <string name="item_flask_with_water_descr">восстанавливает 50 выносливости.</string>
     <string name="fish_raw_item">Сырая рыба</string>
+    <string name="fish_raw_item_descr">в целом съедобна, но лучше бы ее приготовить\nВосстаналивает 30 здоровья и 10 выносливости.</string>
     <string name="fish_fried_item">Жаренная рыба</string>
+    <string name="fish_fried_item_descr">Вкусняшка, ел бы и ел.\nВосстанавливает 55 здоровья и 10 выносливости</string>
     <string name="wood_item">Бревно</string>
+    <string name="info_item_descr">предназначен для изготовления предметов</string>
     <string name="phosphorus_bright">Фосфор яркий</string>
+    <string name="phosphorus_bright_descr">используется для защиты от воров в ночное время.</string>
     <string name="phosphorus_dim">Фосфор тусклый</string>
+    <string name="phosphorus_dim_descr">можно использовать в качестве подогрева пищи.</string>
     <string name="aloe_item">Алоэ</string>
+    <string name="aloe_item_descr">дает эффект регенерации.\nВосстанавливает 30 здоровья и 10 выносливости.</string>
     <string name="arrow_recipe_item">Стрела</string>
+    <string name="arrow_recipe_item_descr">еще бы лук и можно стрелять.\nДобавляет 10 к урону.</string>
     <string name="berry_item">Ягода</string>
+    <string name="berry_item_descr">лечит от отравления.\nВосстанавливает 25 здоровья и 10 выносливости.</string>
     <string name="blueberry_item">Синяя ягода</string>
+    <string name="blueberry_item_descr">дает эффект регенерации.\nВосстанавливает 25 здоровья и 20 выносливости.</string>
     <string name="cactus_item">Кактус</string>
+    <string name="cactus_item_descr">очень острый, я бы даже в лапы не брал, а тут еще и есть надо.\nВосстанавливает 20 здоровья и 10 выносливости.</string>
     <string name="fruit_item">Фрут</string>
+    <string name="fruit_item_descr">этот фрукт не предсказуем, он может выличить или наоборот отравить, неужели мне придется это есть?\nВосстанавливает 20 здоровья и 10 выносливости.</string>
     <string name="honey_item">Мед</string>
+    <string name="honey_item_descr">сладкое собакам вредно, но кто будет меня слушать.. Дает эффект регенерации.\nВосстанавливает 15 здоровья.</string>
     <string name="leaves_item">Листья</string>
     <string name="meat_fried_item">Жаренное мясо</string>
+    <string name="meat_fried_item_descr">вот что мне по душе.\nВосстанавливает 55 здоровья и 10 выносливости.</string>
     <string name="meat_raw_item">Сырое мясо</string>
+    <string name="meat_raw_item_descr">а я это и так, сырую съем.\nВосстанавливает 30 здоровья и 10 выносливости.</string>
     <string name="moss_item">Мох</string>
+    <string name="moss_item_descr">останавливает слабость.\nВосстанавливает 10 здоровья.</string>
     <string name="mushroom_raw_item">Гриб</string>
+    <string name="mushroom_raw_item_descr">вообще непредсказуемая гриб. Может отравить или выличить отравления, а так же может ослабить или остановить ослабления. Лучше приготовь его..</string>
     <string name="mushroom_fried_item">Жаренный гриб</string>
+    <string name="mushroom_fried_item_descr">вот это уже можно кушать.\nВосстанавливает 50 здоровья и 5 выносливости.</string>
     <string name="nurg_born_item">Рог нюрга</string>
     <string name="nurg_plate_item">Пластина нюрга</string>
+    <string name="plate_item_descr">предназначен для изготовления доспехов.</string>
     <string name="phosphorus_item">Фосфор</string>
     <string name="poisoned_point_item">Отравленое острие</string>
     <string name="puchik_plate_item">Пластина пучика</string>
     <string name="scroll_item">Свиток</string>
+    <string name="scroll_item_descr">ну же, открой же этот свиток уже.</string>
     <string name="spork_plate_item">Пластина спорка</string>
     <string name="stone_item">Камень</string>
     <string name="web_item">Паутина</string>
     <string name="scroll_fire_ball">Свиток "Огненный шар"</string>
+    <string name="scroll_fire_ball_descr">хороший урон, берем.\nНаносит 50 урона противнику.</string>
     <string name="scroll_poison">Свиток "Отравление"</string>
+    <string name="scroll_poison_descr">отравляет противника, а так же наносит 30 урона.</string>
     <string name="scroll_weak">Свиток "Слабость"</string>
+    <string name="scroll_weak_descr">ослабивает противника, а так же наносит 30 урона</string>
     <string name="scroll_regeneration">Свиток регенерации</string>
+    <string name="scroll_regeneration_descr">отменяет все отрицательные эффекты.\nВосстанавливает каждую секунду +1 здоровья и выносливости.</string>
 
     <!-- name of weapon -->
     <string name="wooden_sword_recipe_item">Деревянный меч</string>
+    <string name="wooden_sword_recipe_item_descr">выглядит как игрушечный, но лучше чем ничего.\nДобавляет 10 к урону.</string>
     <string name="poisoned_arrow_recipe_item">Отравленная стрела</string>
+    <string name="poisoned_arrow_recipe_item_descr">есть шанс отравить противника.\nДобавляет 20 к урону.</string>
     <string name="katana_recipe_item">Катана</string>
+    <string name="katana_recipe_item_descr">теперь я самурай. При использования супер-приема шанс отравить противника.\nДобавляет 30 к урону.</string>
     <string name="mace_recipe_item">Булава</string>
+    <string name="mace_recipe_item_descr">шанс оглушить противника и нанести повторно урон.\nДобавляет 30 к урону.</string>
     <string name="stone_sword_recipe_item">Каменный меч</string>
+    <string name="stone_sword_recipe_item_descr">уже лучше.\nДобавляет 20 к урону.</string>
     <string name="bow_recipe_item">Лук</string>
+    <string name="bow_recipe_item_descr">еще бы стрелы и я непобедим.\nДобавляет 20 к урону.</string>
 
     <!-- the name of armor -->
     <string name="puchick_armor_recipe_item">Пучиковая броня</string>
+    <string name="puchick_armor_recipe_item_descr">и в этом я буду драться? Эээх..\nПолучаешь две третьих от урона.</string>
     <string name="nurg_armor_recipe_item">Нюрговая броня</string>
+    <string name="nurg_armor_recipe_item_descr">я теперь воин. Защищает от слабости.\nПолучаешь половину от урона.</string>
     <string name="spork_armor_recipe_item">Спорковая броня</string>
+    <string name="spork_armor_recipe_item_descr">выглядит круто и стремно. О вкусах не спорят. защиищает от всех отрицательных эффектов.\nПолучаешь половину от урона.</string>
 
     <!-- name of animal -->
     <string name="rabbit">Кролик</string>
@@ -342,14 +385,14 @@
 
     <!-- new version -->
     <string name="caption_1_1">Первое обновление</string>
-    <string name="date_1_1">16 июня 2024 года</string>
+    <string name="date_1_1">17 июня 2024 года</string>
     <string name="name_version_1_1">version 1.1</string>
     <string name="main_text_1_1">Что появилось новенького:\n
     - строительство зданий;\n
     - выращивание растения;\n
     - добыча воды в колодцах и в других зданий;\n
     - новые виды семян;\n
-    - появились новые предметы, такие мука, хлеб...\n\n
+    - появились новые предметы: мука, хлеб...\n\n
         Дальше будет интересней, но пока у меня нет возможности уделять достаточное время для этой игры, поэтому вынужден ее приостановить\n
         Все можно изменить только благодаря вашей поддержки и помощи, очень благодарен вам =^^=
     </string>

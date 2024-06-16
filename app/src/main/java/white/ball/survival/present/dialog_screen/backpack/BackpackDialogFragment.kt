@@ -175,7 +175,7 @@ class BackpackDialogFragment : DialogFragment() {
 
             @RequiresApi(Build.VERSION_CODES.M)
             override fun findOutInformation(items: ItemsSlot) {
-                val findOutItemSnackbar = Snackbar.make(requireView(), "${requireContext().getString(items.item.nameItem)}", Snackbar.LENGTH_LONG)
+                val findOutItemSnackbar = Snackbar.make(requireView(), "${requireContext().getString(items.item.nameItem)} - ${requireContext().getString(items.item.descrItem)}", Snackbar.LENGTH_LONG)
                 context?.let {
                     findOutItemSnackbar.setTextColor(it.getColor(R.color.gray)) }
                 findOutItemSnackbar.setBackgroundTint(requireContext().getColor(R.color.head_background_dialog_fragment))

@@ -10,6 +10,7 @@ import white.ball.survival.domain.repository.Plant
 
 data class Hut(
     override val nameItem: Int = R.string.hut_recipe_item,
+    override val descrItem: Int = R.string.hut_recipe_item_descr,
     override val imageId: Int = R.drawable.recipe_item_hut,
     override val itemUse: ItemUse = ItemUse.BUILD,
     override val placeForCook: Array<ItemsSlot?>? = arrayOfNulls(3),

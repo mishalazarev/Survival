@@ -10,6 +10,7 @@ import white.ball.survival.domain.repository.Plant
 
 data class Bonfire (
     override val nameItem: Int = R.string.bonfire_recipe_item,
+    override val descrItem: Int = R.string.bonfire_recipe_item_descr,
     override val imageId: Int = R.drawable.recipe_item_bonfire,
     override val itemUse: ItemUse = ItemUse.BUILD,
     override val placeForCook: Array<ItemsSlot?>? = arrayOfNulls(3),

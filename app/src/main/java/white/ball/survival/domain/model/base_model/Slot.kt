@@ -4,6 +4,7 @@ import white.ball.survival.domain.model.extension_model.ItemUse
 
 interface Slot {
     val nameItem: Int
+    val descrItem: Int
     val imageId: Int
     val itemUse: ItemUse
 }

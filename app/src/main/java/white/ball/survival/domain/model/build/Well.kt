@@ -10,6 +10,7 @@ import white.ball.survival.domain.repository.Plant
 
 data class Well(
     override var nameItem: Int = R.string.well_build_recipe_item,
+    override val descrItem: Int = R.string.well_build_recipe_item_descr,
     override var imageId: Int = R.drawable.recipe_item_well,
     override var itemUse: ItemUse = ItemUse.BUILD,
     override val placeForCook: Array<ItemsSlot?>? = null,
