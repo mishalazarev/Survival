@@ -4,7 +4,7 @@ import white.ball.survival.domain.model.News.NewsNotification
 import white.ball.survival.domain.model.animal.Animal
 import white.ball.survival.domain.model.base_model.LiveObject
 import white.ball.survival.domain.model.base_model.Player
-import white.ball.survival.domain.model.base_model.Slot
+import white.ball.survival.domain.model.base_model.RecipeForItem
 import white.ball.survival.domain.model.extension_model.Effect
 import white.ball.survival.domain.model.extension_model.ItemsSlot
 import white.ball.survival.domain.model.weapon.Weapon
@@ -40,7 +40,7 @@ interface PlayerRepository : LiveObject {
 
     fun showRecipes() : Array<Weapon>
 
-    fun createItem(recipeItem: Slot): Boolean
+    fun createItem(recipeItem: RecipeForItem): Boolean
 
     fun takeItems(itemsSlots: MutableList<ItemsSlot>)
 

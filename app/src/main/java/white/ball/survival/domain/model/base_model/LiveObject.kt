@@ -7,5 +7,4 @@ interface LiveObject {
     fun useAbility(): Effect
 
     fun upDateInformation()
-
 }

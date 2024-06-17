@@ -7,6 +7,7 @@ import white.ball.survival.domain.model.build.Well
 import white.ball.survival.domain.model.build.WoodHouse
 import white.ball.survival.domain.model.extension_model.*
 import white.ball.survival.domain.model.weapon.Weapon
+import white.ball.survival.domain.model.base_model.Item
 
 data class Player(
     var namePlayer: String = "",
@@ -25,7 +26,12 @@ data class Player(
     var thirst: IndicatorThirst = IndicatorThirst(Indicator(100,100)),
 
     var newsNotifications: MutableList<NewsNotification> = mutableListOf(),
-    var backpack: MutableList<ItemsSlot> = mutableListOf(),
+    var backpack: MutableList<ItemsSlot> = mutableListOf(ItemsSlot(Item.WOOD, 2),ItemsSlot(Item.WOOD, 2),ItemsSlot(Item.WOOD, 2),ItemsSlot(Item.WOOD, 2),ItemsSlot(Item.WOOD, 2),ItemsSlot(Item.WOOD, 2),ItemsSlot(Item.WOOD, 2)
+            , ItemsSlot(Item.STONE, 2), ItemsSlot(Item.STONE, 2), ItemsSlot(Item.STONE, 2), ItemsSlot(Item.STONE, 2), ItemsSlot(Item.STONE, 2), ItemsSlot(Item.STONE, 2)
+        , ItemsSlot(Item.STONE, 2), ItemsSlot(Item.STONE, 2), ItemsSlot(Item.STONE, 2), ItemsSlot(Item.STONE, 2), ItemsSlot(Item.STONE, 2), ItemsSlot(Item.STONE, 2)
+        , ItemsSlot(Item.LEAVES, 2), ItemsSlot(Item.LEAVES, 2), ItemsSlot(Item.LEAVES, 2), ItemsSlot(Item.LEAVES, 2), ItemsSlot(Item.LEAVES, 2), ItemsSlot(Item.LEAVES, 2), ItemsSlot(Item.LEAVES, 2)
+        , ItemsSlot(Item.LEAVES, 2), ItemsSlot(Item.LEAVES, 2), ItemsSlot(Item.LEAVES, 2), ItemsSlot(Item.LEAVES, 2), ItemsSlot(Item.LEAVES, 2), ItemsSlot(Item.LEAVES, 2), ItemsSlot(Item.LEAVES, 2), ItemsSlot(Item.LEAVES, 2), ItemsSlot(Item.LEAVES, 2)
+        , ItemsSlot(Item.LEAVES, 2), ItemsSlot(Item.LEAVES, 2), ItemsSlot(Item.LEAVES, 2), ItemsSlot(Item.LEAVES, 2)),
     var placeForPutOn: MutableList<ItemsSlot?> = mutableListOf(null, null, null, null),
 
     // effects

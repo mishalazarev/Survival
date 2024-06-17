@@ -1,8 +1,8 @@
 package white.ball.survival.domain.model.weapon
 
 import white.ball.survival.R
-import white.ball.survival.domain.model.base_model.Slot
 import white.ball.survival.domain.model.base_model.Item
+import white.ball.survival.domain.model.base_model.RecipeForItem
 import white.ball.survival.domain.model.extension_model.Effect
 import white.ball.survival.domain.model.extension_model.ItemUse
 import white.ball.survival.domain.model.extension_model.ItemsSlot
@@ -14,8 +14,8 @@ enum class Weapon (
     override var itemUse: ItemUse,
     val damage: Int,
     val itemEffect: Effect,
-    var recipe: List<ItemsSlot>
-) : Slot {
+    override var recipe: List<ItemsSlot>,
+) : RecipeForItem {
 
     WOODEN_SWORD(R.string.wooden_sword_recipe_item, R.string.wooden_sword_recipe_item_descr, R.drawable.recipe_item_wooden_sword,ItemUse.WEAPON, 10, Effect.NO_EFFECT, mutableListOf(
         ItemsSlot(Item.WOOD,3)

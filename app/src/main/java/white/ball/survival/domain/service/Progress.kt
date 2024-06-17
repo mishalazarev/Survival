@@ -6,7 +6,7 @@ import white.ball.survival.domain.model.armor.Armor
 import white.ball.survival.domain.model.base_model.GameTime
 import white.ball.survival.domain.model.base_model.Item
 import white.ball.survival.domain.model.base_model.Player
-import white.ball.survival.domain.model.base_model.Slot
+import white.ball.survival.domain.model.base_model.SlotForItem
 import white.ball.survival.domain.model.build.Bonfire
 import white.ball.survival.domain.model.build.Hut
 import white.ball.survival.domain.model.build.StoneHouse
@@ -426,7 +426,7 @@ class Progress {
             val nameItem = currentGamePlayProgress.getInt(nameItemKey, 0)
 
             val allBuilds = arrayOf(Bonfire(), Well(), Hut(), WoodHouse(), StoneHouse())
-            val allItemsInGame = arrayListOf<Slot>()
+            val allItemsInGame = arrayListOf<SlotForItem>()
             allItemsInGame.addAll(Item.entries)
             allItemsInGame.addAll(Armor.entries)
             allItemsInGame.addAll(Weapon.entries)

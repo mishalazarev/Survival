@@ -1,6 +1,6 @@
 package white.ball.survival.domain.repository
 
-import white.ball.survival.domain.model.base_model.Slot
+import white.ball.survival.domain.model.base_model.SlotForItem
 import white.ball.survival.domain.model.base_model.Item
 
 
@@ -12,5 +12,5 @@ interface ItemProperties {
 
     fun useItem(): Boolean
 
-    fun joinItems(items: List<Slot>): Boolean
+    fun joinItems(items: List<SlotForItem>): Boolean
 }

@@ -12,7 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 import white.ball.survival.R
 import white.ball.survival.databinding.FragmentCreateRecipeItemDialogBinding
 import white.ball.survival.domain.model.armor.Armor
-import white.ball.survival.domain.model.base_model.Slot
+import white.ball.survival.domain.model.base_model.RecipeForItem
 import white.ball.survival.domain.model.build.Bonfire
 import white.ball.survival.domain.model.build.Hut
 import white.ball.survival.domain.model.build.StoneHouse
@@ -65,7 +65,7 @@ class CreateRecipeItemDialogFragment : DialogFragment() {
 
             weaponAdapter = WeaponAdapter(object : RecipeItemCreateRepository {
 
-                override fun createItem(recipeItem: Slot) {
+                override fun createItem(recipeItem: RecipeForItem) {
                     if (viewModel.createRecipeItem(recipeItem)) {
                         showTextCreateRecipeItem()
                         createRecipeItem.start()
@@ -78,7 +78,7 @@ class CreateRecipeItemDialogFragment : DialogFragment() {
             }, requireContext())
 
             armorAdapter = ArmorAdapter(object  : RecipeItemCreateRepository {
-                override fun createItem(recipeItem: Slot) {
+                override fun createItem(recipeItem: RecipeForItem) {
                     if (viewModel.createRecipeItem(recipeItem)) {
                         showTextCreateRecipeItem()
                         createRecipeItem.start()
@@ -91,7 +91,7 @@ class CreateRecipeItemDialogFragment : DialogFragment() {
             }, requireContext())
 
             buildAdapter = BuildAdapter(object : RecipeItemCreateRepository {
-                override fun createItem(recipeItem: Slot) {
+                override fun createItem(recipeItem: RecipeForItem) {
                     if (viewModel.createRecipeItem(recipeItem)) {
                         showTextCreateRecipeItem()
                         createRecipeItem.start()

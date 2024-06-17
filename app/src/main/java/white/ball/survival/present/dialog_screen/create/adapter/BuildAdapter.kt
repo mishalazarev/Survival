@@ -11,10 +11,9 @@ import android.widget.TextView
 import androidx.core.view.isEmpty
 import androidx.recyclerview.widget.RecyclerView
 import white.ball.survival.databinding.RecipeItemHouseBinding
-import white.ball.survival.domain.model.build.Bonfire
+import white.ball.survival.domain.model.base_model.RecipeForItem
 import white.ball.survival.domain.model.build.Hut
 import white.ball.survival.domain.model.build.StoneHouse
-import white.ball.survival.domain.model.build.Well
 import white.ball.survival.domain.model.build.WoodHouse
 import white.ball.survival.domain.repository.BuildRepository
 import white.ball.survival.domain.repository.RecipeItemCreateRepository
@@ -23,12 +22,6 @@ class BuildAdapter(
     private val recipeItemCreateRepository: RecipeItemCreateRepository,
     private val context: Context
 ): RecyclerView.Adapter<BuildAdapter.BuildHolder>(), OnClickListener {
-
-    private val well = Well()
-    private val bonfire = Bonfire()
-    private val hut = Hut()
-    private val woodHouse = WoodHouse()
-    private val stoneHouse = StoneHouse()
 
     var buildList: List<BuildRepository> = emptyList()
         set(value) {
@@ -78,7 +71,7 @@ class BuildAdapter(
 
         holder.bind(recipeBuild)
 
-        if (holder.binding.wrapperRecipeItemLinearLayout.isEmpty()) {
+        if (holder.binding.wrapperRecipeItemLinearLayout.isEmpty() && recipeBuild is RecipeForItem) {
             for (index in recipeBuild.recipe.indices) {
                 val itemSlotForCreateTextView = TextView(context)
                 itemSlotForCreateTextView.setBackgroundResource(recipeBuild.recipe[index].item.imageId)
@@ -98,7 +91,7 @@ class BuildAdapter(
     }
 
     override fun onClick(view: View?) {
-        val recipeItem = view!!.tag as BuildRepository
+        val recipeItem = view!!.tag as RecipeForItem
 
         recipeItemCreateRepository.createItem(recipeItem)
     }

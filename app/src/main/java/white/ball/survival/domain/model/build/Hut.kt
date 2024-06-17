@@ -21,7 +21,7 @@ data class Hut(
     override var antiThief: Indicator? = Indicator(0, 1140),
     override var placeForFruit: ItemsSlot? = null,
     override var plant: Plant? = null,
-    override val recipe: List<ItemsSlot>  = mutableListOf(ItemsSlot(Item.LEAVES, 6), ItemsSlot(Item.WOOD, 15)),
+    override val recipe: List<ItemsSlot>  = mutableListOf(ItemsSlot(Item.LEAVES, 12), ItemsSlot(Item.WOOD, 6)),
 ) : BuildRepository {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -61,5 +61,4 @@ data class Hut(
         result = 31 * result + recipe.hashCode()
         return result
     }
-
 }

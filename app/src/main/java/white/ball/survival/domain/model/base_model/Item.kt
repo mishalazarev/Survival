@@ -11,8 +11,8 @@ enum class Item (
     override var itemUse: ItemUse,
     val nutritionalValue: Int,
     val moistureValue: Int,
-    val ability: List<Effect>
-) : Slot {
+    val ability: List<Effect>,
+) : SlotForItem {
 
     SEED_IN_SHELL(R.string.seed_in_shell, R.string.seed_in_shell_descr, R.drawable.item_seed_in_shell, ItemUse.SEED_IN_SHELL, 0, 0, mutableListOf()),
     SEED_ALOE(R.string.seed_aloe, R.string.seed_descr, R.drawable.item_aloe_seed, ItemUse.OPENED_SEED, 0, 0, mutableListOf()),

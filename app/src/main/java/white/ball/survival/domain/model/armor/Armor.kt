@@ -2,7 +2,8 @@ package white.ball.survival.domain.model.armor
 
 import white.ball.survival.R
 import white.ball.survival.domain.model.base_model.Item
-import white.ball.survival.domain.model.base_model.Slot
+import white.ball.survival.domain.model.base_model.RecipeForItem
+import white.ball.survival.domain.model.base_model.SlotForItem
 import white.ball.survival.domain.model.extension_model.Effect
 import white.ball.survival.domain.model.extension_model.ItemUse
 import white.ball.survival.domain.model.extension_model.ItemsSlot
@@ -14,9 +15,9 @@ enum class Armor (
     override var itemUse: ItemUse,
     val defence: Double,
     val armorEffect: List<Effect>,
-    val recipe: List<ItemsSlot>,
-    val playerInArmor: Int
-) : Slot {
+    override val recipe: List<ItemsSlot>,
+    val playerInArmor: Int,
+) : SlotForItem, RecipeForItem {
 
     PUCHICK_ARMOR(R.string.puchick_armor_recipe_item, R.string.puchick_armor_recipe_item_descr, R.drawable.recipe_item_puchick_armor, ItemUse.ARMOR, 1.5, mutableListOf(), mutableListOf(
         ItemsSlot(Item.PUCHICK_PLATE, 9), ItemsSlot(Item.LEAVES, 3), ItemsSlot(Item.WOOD, 1)

@@ -1,5 +1,6 @@
 package white.ball.survival.domain.service
 
+import android.util.Log
 import white.ball.survival.R
 import white.ball.survival.domain.convertor.UIRepository
 import white.ball.survival.domain.model.News.NewsNotification
@@ -7,7 +8,12 @@ import white.ball.survival.domain.model.animal.Animal
 import white.ball.survival.domain.model.armor.Armor
 import white.ball.survival.domain.model.base_model.Item
 import white.ball.survival.domain.model.base_model.Player
-import white.ball.survival.domain.model.base_model.Slot
+import white.ball.survival.domain.model.base_model.RecipeForItem
+import white.ball.survival.domain.model.build.Bonfire
+import white.ball.survival.domain.model.build.Hut
+import white.ball.survival.domain.model.build.StoneHouse
+import white.ball.survival.domain.model.build.Well
+import white.ball.survival.domain.model.build.WoodHouse
 import white.ball.survival.domain.model.extension_model.Effect
 import white.ball.survival.domain.model.extension_model.Indicator
 import white.ball.survival.domain.model.extension_model.IndicatorEndurance
@@ -19,6 +25,7 @@ import white.ball.survival.domain.model.weapon.Weapon
 import white.ball.survival.domain.repository.BuildRepository
 import white.ball.survival.domain.repository.InteractionWithEnvironmentRepository
 import white.ball.survival.domain.repository.PlayerRepository
+import white.ball.survival.present.screen.main_screen.game_play.fight.FightFragment.Companion.TAG
 import kotlin.random.Random
 
 typealias PlayerListener = (currentPlayer: Player) -> Unit
@@ -117,131 +124,72 @@ class PlayerAction(
     }
 
 
-    override fun createItem(recipeItem: Slot): Boolean {
-        val itemsBackpackForCreate = mutableListOf<ItemsSlot>()
-        val clearList = mutableListOf<ItemsSlot>()
-        val flagListBoolean = mutableListOf<Boolean>()
+    override fun createItem(newItemForcreate: RecipeForItem): Boolean {
+        val targetItemsForCreate = mutableListOf<ItemsSlot>()
+        val allSimilarItemsForRecipes = arrayListOf<ItemsSlot>()
+        var isItemsEnough = true
         val currentBackpack = currentPlayer.backpack
+        var backpackItemIndex = 0
 
-        if (recipeItem is Weapon) {
-            for (recipeIndex in recipeItem.recipe.indices) {
-                itemsBackpackForCreate.add(ItemsSlot(recipeItem.recipe[recipeIndex].item, 0))
-                Loop@ for (backpackIndex in currentBackpack.indices) {
-                    if (recipeItem.recipe[recipeIndex].item.nameItem == currentBackpack[backpackIndex].item.nameItem) {
-                        itemsBackpackForCreate[recipeIndex].count += currentBackpack[backpackIndex].count
-                        if (checkOnCountItemsForCreateRecipeItems(recipeItem.recipe[recipeIndex], itemsBackpackForCreate[recipeIndex], currentBackpack[backpackIndex])) break@Loop
-                    }
-                }
-            }
-
-            for (index in itemsBackpackForCreate.indices) {
-                flagListBoolean.add(
-                    index,
-                    itemsBackpackForCreate[index].count == recipeItem.recipe[index].count
-                )
-            }
-
-            flagListBoolean.forEach {
-                if (!it) {
-                    itemsBackpackForCreate.removeAll(currentBackpack)
-                    itemsBackpackForCreate.forEach { itemsEmpty ->
-                        if (itemsEmpty.count == 0) clearList.add(itemsEmpty)
-                    }
-                    itemsBackpackForCreate.removeAll(clearList)
-                    currentBackpack.addAll(itemsBackpackForCreate)
-                    return false
-                }
-            }
-
-            if (recipeItem.itemUse == ItemUse.ARROW) {
-                takeItems(mutableListOf(ItemsSlot(recipeItem, 4)))
-            } else {
-                currentBackpack.add(ItemsSlot(recipeItem, 1))
-            }
-
-            notifyPlayerChanges()
-            return true
-        } else if (recipeItem is Armor) {
-            for (mainIndex in recipeItem.recipe.indices) {
-                itemsBackpackForCreate.add(ItemsSlot(recipeItem.recipe[mainIndex].item, 0))
-                Loop@ for (secondIndex in currentBackpack.indices) {
-                    if (recipeItem.recipe[mainIndex].item.nameItem == currentBackpack[secondIndex].item.nameItem) {
-                        itemsBackpackForCreate[mainIndex].count += currentBackpack[secondIndex].count
-                        if (checkOnCountItemsForCreateRecipeItems(
-                                recipeItem.recipe[mainIndex],
-                                itemsBackpackForCreate[mainIndex],
-                                currentBackpack[secondIndex]
-                            )
-                        ) break@Loop
-                    }
-                }
-            }
-
-            for (index in itemsBackpackForCreate.indices) {
-                flagListBoolean.add(
-                    index,
-                    itemsBackpackForCreate[index].count == recipeItem.recipe[index].count
-                )
-            }
-
-            flagListBoolean.forEach {
-                if (!it) {
-                    itemsBackpackForCreate.removeAll(currentBackpack)
-                    itemsBackpackForCreate.forEach { itemsEmpty ->
-                        if (itemsEmpty.count == 0) clearList.add(itemsEmpty)
-                    }
-                    itemsBackpackForCreate.removeAll(clearList)
-                    currentBackpack.addAll(itemsBackpackForCreate)
-                    return false
-                }
-            }
-
-
-            currentBackpack.add(ItemsSlot(recipeItem, 1))
-            notifyPlayerChanges()
-
-            return true
-        } else if (recipeItem is BuildRepository) {
-            for (mainIndex in recipeItem.recipe.indices) {
-                itemsBackpackForCreate.add(ItemsSlot(recipeItem.recipe[mainIndex].item, 0))
-                Loop@ for (secondIndex in currentBackpack.indices) {
-                    if (recipeItem.recipe[mainIndex].item.nameItem == currentBackpack[secondIndex].item.nameItem) {
-                        itemsBackpackForCreate[mainIndex].count += currentBackpack[secondIndex].count
-                        if (checkOnCountItemsForCreateRecipeItems(
-                                recipeItem.recipe[mainIndex],
-                                itemsBackpackForCreate[mainIndex],
-                                currentBackpack[secondIndex]
-                            )
-                        ) break@Loop
-                    }
-                }
-            }
-
-            for (index in itemsBackpackForCreate.indices) {
-                flagListBoolean.add(
-                    index,
-                    itemsBackpackForCreate[index].count == recipeItem.recipe[index].count
-                )
-            }
-
-            flagListBoolean.forEach {
-                if (!it) {
-                    itemsBackpackForCreate.removeAll(currentBackpack)
-                    itemsBackpackForCreate.forEach { itemsEmpty ->
-                        if (itemsEmpty.count == 0) clearList.add(itemsEmpty)
-                    }
-                    itemsBackpackForCreate.removeAll(clearList)
-                    currentBackpack.addAll(itemsBackpackForCreate)
-                    return false
-                }
-            }
-
-            currentBackpack.add(ItemsSlot(recipeItem, 1))
-            notifyPlayerChanges()
-            return true
+        newItemForcreate.recipe.forEach {
+            allSimilarItemsForRecipes.add(ItemsSlot(it.item,0))
         }
 
-        notifyPlayerChanges()
+        if (newItemForcreate is Weapon || newItemForcreate is Armor || newItemForcreate is BuildRepository) {
+            for (itemIndex in newItemForcreate.recipe.indices) {
+                while (backpackItemIndex != currentBackpack.size) {
+                    Log.i(TAG, "createItem: ${currentBackpack.size} ${backpackItemIndex}")
+                    if (newItemForcreate.recipe[itemIndex].item.nameItem == currentBackpack[backpackItemIndex].item.nameItem) {
+                        allSimilarItemsForRecipes[itemIndex].count += currentBackpack[backpackItemIndex].count
+                        currentBackpack.removeAt(backpackItemIndex)
+                        if (backpackItemIndex != 0) backpackItemIndex--
+                    } else {
+                        backpackItemIndex++
+                    }
+                }
+                backpackItemIndex = 0
+            }
+
+            loop@ for (index in 0 until newItemForcreate.recipe.size) {
+                if (allSimilarItemsForRecipes[index].count == newItemForcreate.recipe[index].count) {
+                    allSimilarItemsForRecipes[index].count = 0
+                } else {
+                    isItemsEnough = calculateItemsForCreate(allSimilarItemsForRecipes[index], newItemForcreate.recipe[index], targetItemsForCreate)
+                }
+
+                if (!isItemsEnough) {
+                    currentBackpack.addAll(targetItemsForCreate)
+                    divideIntoGroupsForBackpackAfterCreate(allSimilarItemsForRecipes)
+                    break@loop
+                }
+            }
+
+            if (isItemsEnough) {
+                val allRecipeOfItems = arrayListOf<RecipeForItem>()
+                val allBuildings = arrayOf(Well(), Bonfire(), Hut(), WoodHouse(), StoneHouse())
+                allRecipeOfItems.addAll(Weapon.entries)
+                allRecipeOfItems.addAll(Armor.entries)
+                allRecipeOfItems.addAll(allBuildings)
+
+                allRecipeOfItems.forEach { currentitem ->
+                    if (currentitem.nameItem == newItemForcreate.nameItem) {
+                        if (newItemForcreate.nameItem == Weapon.POISONED_ARROW.nameItem || newItemForcreate.nameItem == Weapon.ARROW.nameItem) {
+                            currentBackpack.add(ItemsSlot(currentitem,4))
+                        } else {
+                            currentBackpack.add(ItemsSlot(currentitem, 1))
+                        }
+                    }
+                }
+
+                divideIntoGroupsForBackpackAfterCreate(allSimilarItemsForRecipes)
+                return true
+            }
+
+            notifyPlayerChanges()
+        } else {
+            return throw IllegalArgumentException("Unknown recipes for create")
+        }
+
         return false
     }
 
@@ -813,21 +761,46 @@ class PlayerAction(
         }
     }
 
-    private fun checkOnCountItemsForCreateRecipeItems(
-        needQuantityItems: ItemsSlot,
-        itemsForCreate: ItemsSlot,
-        backpackSlot: ItemsSlot
-    ): Boolean {
-        return if (itemsForCreate.count < needQuantityItems.count) {
-            false
-        } else if (itemsForCreate.count > needQuantityItems.count) {
-            backpackSlot.count = itemsForCreate.count - needQuantityItems.count
-            itemsForCreate.count = needQuantityItems.count
-            true
-        } else {
-            currentPlayer.backpack.remove(backpackSlot)
-            true
+    private fun divideIntoGroupsForBackpackAfterCreate(allSimilarItemsForRecipes: MutableList<ItemsSlot>) {
+        var index = 0
+
+        while (allSimilarItemsForRecipes.isNotEmpty()) {
+            if (allSimilarItemsForRecipes[0].count < 10 || allSimilarItemsForRecipes[0].count == 10) {
+                currentPlayer.backpack.add(allSimilarItemsForRecipes[0])
+                allSimilarItemsForRecipes.removeAt(0)
+            } else if (allSimilarItemsForRecipes[0].count > 10) {
+                currentPlayer.backpack.add(ItemsSlot(allSimilarItemsForRecipes[0].item, 10))
+                allSimilarItemsForRecipes[0].count -= 10
+            }
         }
+
+        while (index != currentPlayer.backpack.size) {
+            if (currentPlayer.backpack[index].count == 0) {
+                currentPlayer.backpack.removeAt(index)
+                index--
+            } else {
+                index++
+            }
+        }
+    }
+
+    private fun calculateItemsForCreate(
+        currentItemsInBackpackItems: ItemsSlot,
+        itemsForCreate: ItemsSlot,
+        targetItemsSlot: MutableList<ItemsSlot>
+    ): Boolean {
+        if (itemsForCreate.count < currentItemsInBackpackItems.count) {
+            targetItemsSlot.add(ItemsSlot(currentItemsInBackpackItems.item, itemsForCreate.count))
+            currentItemsInBackpackItems.count -= itemsForCreate.count
+            notifyPlayerChanges()
+            return true
+        } else if (itemsForCreate.count == currentItemsInBackpackItems.count) {
+            targetItemsSlot.add(ItemsSlot(currentItemsInBackpackItems.item, currentItemsInBackpackItems.count))
+            notifyPlayerChanges()
+            return true
+        }
+        notifyPlayerChanges()
+        return false
     }
 
     private fun checkEnduranceOnSumParameter(value: Int): Int {
