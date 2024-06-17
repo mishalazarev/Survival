@@ -124,17 +124,12 @@ class PlayerAction(
         val currentBackpack = currentPlayer.backpack
 
         if (recipeItem is Weapon) {
-            for (mainIndex in recipeItem.recipe.indices) {
-                itemsBackpackForCreate.add(ItemsSlot(recipeItem.recipe[mainIndex].item, 0))
-                Loop@ for (secondIndex in currentBackpack.indices) {
-                    if (recipeItem.recipe[mainIndex].item.nameItem == currentBackpack[secondIndex].item.nameItem) {
-                        itemsBackpackForCreate[mainIndex].count += currentBackpack[secondIndex].count
-                        if (checkOnCountItemsForCreateRecipeItems(
-                                recipeItem.recipe[mainIndex],
-                                itemsBackpackForCreate[mainIndex],
-                                currentBackpack[secondIndex]
-                            )
-                        ) break@Loop
+            for (recipeIndex in recipeItem.recipe.indices) {
+                itemsBackpackForCreate.add(ItemsSlot(recipeItem.recipe[recipeIndex].item, 0))
+                Loop@ for (backpackIndex in currentBackpack.indices) {
+                    if (recipeItem.recipe[recipeIndex].item.nameItem == currentBackpack[backpackIndex].item.nameItem) {
+                        itemsBackpackForCreate[recipeIndex].count += currentBackpack[backpackIndex].count
+                        if (checkOnCountItemsForCreateRecipeItems(recipeItem.recipe[recipeIndex], itemsBackpackForCreate[recipeIndex], currentBackpack[backpackIndex])) break@Loop
                     }
                 }
             }
@@ -201,8 +196,10 @@ class PlayerAction(
                 }
             }
 
+
             currentBackpack.add(ItemsSlot(recipeItem, 1))
             notifyPlayerChanges()
+
             return true
         } else if (recipeItem is BuildRepository) {
             for (mainIndex in recipeItem.recipe.indices) {
@@ -396,7 +393,7 @@ class PlayerAction(
     }
 
     override fun thiefStealItem() {
-        if (interactionWithEnvironmentRepository.getCurrentLocation().build!!.placeForAntiThief[0] != null) return
+        if (interactionWithEnvironmentRepository.getCurrentLocation().build != null && interactionWithEnvironmentRepository.getCurrentLocation().build!!.placeForAntiThief[0] != null) return
         if (currentPlayer.backpack.isEmpty()) return
 
         val randomItem = currentPlayer.backpack[Random.nextInt(0, currentPlayer.backpack.size)]

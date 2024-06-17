@@ -299,6 +299,9 @@ class BackpackDialogFragment : DialogFragment() {
             }
         }
 
+        binding.indicatorExpProgressBar.setMaxValue(levelUp.getMaxExp(viewModel.player.value!!.level))
+
+
         isEmptyBackpack()
 
 
